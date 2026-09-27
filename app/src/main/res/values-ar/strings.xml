@@ -79,8 +79,6 @@
     <string name="menu_finish_shopping">إنهاء التسوق</string>
     <string name="section_header">%1$s · %2$d</string>
     <string name="in_basket_header">في السلة · %d</string>
-    <string name="totals_total">الإجمالي %1$s</string>
-    <string name="totals_in_basket">في السلة %1$s</string>
     <plurals name="items_without_price">
         <item quantity="zero">لا عناصر بدون سعر</item>
         <item quantity="one">عنصر واحد بدون سعر</item>
@@ -95,22 +93,6 @@
     <string name="item_quantity_price">%1$d × %2$s</string>
     <string name="price_missing">—</string>
     <string name="item_removed">تمت إزالة %1$s</string>
-    <plurals name="clear_basket_title">
-        <item quantity="zero">إزالة %d عنصر من السلة؟</item>
-        <item quantity="one">إزالة عنصر واحد من السلة؟</item>
-        <item quantity="two">إزالة عنصرين من السلة؟</item>
-        <item quantity="few">إزالة %d عناصر من السلة؟</item>
-        <item quantity="many">إزالة %d عنصرًا من السلة؟</item>
-        <item quantity="other">إزالة %d عنصر من السلة؟</item>
-    </plurals>
-    <plurals name="clear_basket_message">
-        <item quantity="zero">لا توجد عناصر متبقية للشراء.</item>
-        <item quantity="one">يبقى عنصر واحد متبقٍ للشراء في القائمة.</item>
-        <item quantity="two">يبقى عنصران متبقيان للشراء في القائمة.</item>
-        <item quantity="few">تبقى %d عناصر متبقية للشراء في القائمة.</item>
-        <item quantity="many">يبقى %d عنصرًا متبقيًا للشراء في القائمة.</item>
-        <item quantity="other">يبقى %d عنصر متبقٍ للشراء في القائمة.</item>
-    </plurals>
     <plurals name="finish_summary">
         <item quantity="zero">تم شراء %1$d من %2$d · أُنفق %3$s</item>
         <item quantity="one">تم شراء %1$d من %2$d · أُنفق %3$s</item>
@@ -144,10 +126,10 @@
     <string name="edit_item_title">تعديل العنصر</string>
     <string name="field_name">الاسم</string>
     <string name="field_quantity">الكمية</string>
-    <string name="field_unit_price">سعر الوحدة</string>
+    <string name="field_unit_price">سعر الوحدة (اختياري)</string>
     <string name="field_category">الفئة</string>
-    <string name="field_note">ملاحظة</string>
-    <string name="note_hint">مثلًا: مقطّع</string>
+    <string name="field_note">ملاحظة (اختياري)</string>
+    <string name="note_hint">مثلًا: مقطّع، الكبير</string>
     <string name="line_total">%1$d × %2$s = %3$s</string>
     <string name="add_to_list">إضافة إلى %1$s</string>
     <string name="save_changes">حفظ التغييرات</string>
@@ -242,7 +224,7 @@
     <string name="setting_language">اللغة</string>
     <string name="language_system">النظام</string>
     <string name="setting_move_ticked">نقل العناصر المحددة للأسفل</string>
-    <string name="setting_move_ticked_summary">تنتقل العناصر المحددة إلى \"في السلة\" أسفل كل قائمة</string>
+    <string name="setting_move_ticked_summary">تنتقل العناصر المحددة إلى \"في السلة\" في الأسفل</string>
     <string name="setting_categories">الفئات</string>
     <string name="setting_refresh_catalog">تحديث كتالوج المنتجات</string>
     <string name="last_updated">آخر تحديث %1$s</string>
@@ -252,6 +234,22 @@
     <string name="reset_title">إعادة تعيين كل القوائم؟</string>
     <string name="reset_message">سيتم استبدال قوائمك وفئاتك بالبيانات النموذجية. لا يمكن التراجع عن ذلك.</string>
     <string name="reset_confirm">إعادة تعيين</string>
-    <string name="version">الإصدار %1$s</string>
-    <string name="data_credit">بيانات المنتجات: DummyJSON (dummyjson.com)</string>
+
+    <!-- Design refresh -->
+    <string name="totals_total_label">الإجمالي</string>
+    <string name="totals_in_basket_label">في السلة</string>
+    <plurals name="items_removed">
+        <item quantity="zero">لم تتم إزالة أي عنصر</item>
+        <item quantity="one">تمت إزالة عنصر واحد</item>
+        <item quantity="two">تمت إزالة عنصرين</item>
+        <item quantity="few">تمت إزالة %d عناصر</item>
+        <item quantity="many">تمت إزالة %d عنصرًا</item>
+        <item quantity="other">تمت إزالة %d عنصر</item>
+    </plurals>
+    <string name="category_no_items">لا عناصر</string>
+    <string name="setting_categories_summary">ترتيب الممرات لكل القوائم</string>
+    <string name="setting_reset_summary">يستبدل القوائم والفئات</string>
+    <string name="setting_version">الإصدار</string>
+    <string name="setting_product_data">بيانات المنتجات</string>
+    <string name="setting_product_data_summary">DummyJSON (dummyjson.com)</string>
 </resources>

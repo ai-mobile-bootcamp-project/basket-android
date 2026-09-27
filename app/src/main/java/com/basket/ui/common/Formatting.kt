@@ -58,3 +58,23 @@ fun Category.displayName(context: Context): String = displayName(context.resourc
 
 @Composable
 fun Category.label(): String = name ?: key?.let { stringResource(it.labelRes) } ?: ""
+
+/**
+ * The aisle emoji of a default category (design handover, "Category emoji"). Rendered as text with the system emoji
+ * font; decorative only, so callers hide it from TalkBack. Categories the user added have none.
+ */
+val CategoryKey.emoji: String
+    get() = when (this) {
+        CategoryKey.FRUIT_VEG -> "🍎"
+        CategoryKey.BAKERY -> "🍞"
+        CategoryKey.DAIRY_EGGS -> "🥛"
+        CategoryKey.MEAT_FISH -> "🥩"
+        CategoryKey.PANTRY -> "🫙"
+        CategoryKey.FROZEN -> "🧊"
+        CategoryKey.DRINKS -> "🧃"
+        CategoryKey.HOUSEHOLD_PETS -> "🧻"
+        CategoryKey.OTHER -> "🛒"
+    }
+
+/** Emoji of this category, or null for a category the user added. */
+val Category.emoji: String? get() = key?.emoji

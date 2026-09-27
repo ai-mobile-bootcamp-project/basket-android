@@ -14,6 +14,7 @@ import com.basket.R
 import com.basket.databinding.ItemCategoryBinding
 import com.basket.databinding.ItemCategoryFooterBinding
 import com.basket.ui.common.displayName
+import com.basket.ui.common.emoji
 import com.google.android.material.color.MaterialColors
 
 /**
@@ -80,9 +81,15 @@ class CategoryAdapter(
             val context = binding.root.context
             val name = row.category.displayName(context)
             val locked = row.category.isOther
+            val emoji = row.category.emoji
             binding.name.text = name
-            binding.itemCount.text =
+            binding.emoji.text = emoji.orEmpty()
+            binding.emoji.visibility = if (emoji == null) View.INVISIBLE else View.VISIBLE
+            binding.itemCount.text = if (row.itemCount == 0) {
+                context.getString(R.string.category_no_items)
+            } else {
                 context.resources.getQuantityString(R.plurals.category_item_count, row.itemCount, row.itemCount)
+            }
             binding.dragHandle.isVisible = !locked
             binding.dragHandle.contentDescription = context.getString(R.string.cd_reorder_category, name)
             binding.lockIcon.isVisible = locked

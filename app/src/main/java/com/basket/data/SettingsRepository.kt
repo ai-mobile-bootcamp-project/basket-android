@@ -27,6 +27,9 @@ class SettingsRepository @Inject constructor(
 ) {
     private object Keys {
         val MOVE_TICKED_DOWN = booleanPreferencesKey("move_ticked_down")
+        val ONBOARDING_DONE = booleanPreferencesKey("onboarding_done")
+
+        /** Set by 1.0.0 after importing the sample data on first launch; such installs have seen the app already. */
         val SAMPLE_DATA_IMPORTED = booleanPreferencesKey("sample_data_imported")
     }
 
@@ -40,9 +43,13 @@ class SettingsRepository @Inject constructor(
         context.dataStore.edit { it[Keys.MOVE_TICKED_DOWN] = enabled }
     }
 
-    suspend fun isSampleDataImported(): Boolean = context.dataStore.data.first()[Keys.SAMPLE_DATA_IMPORTED] ?: false
+    /** True once the user has left the Welcome screen (either button). Reset sample data keeps it. */
+    suspend fun isOnboardingDone(): Boolean {
+        val prefs = context.dataStore.data.first()
+        return prefs[Keys.ONBOARDING_DONE] ?: prefs[Keys.SAMPLE_DATA_IMPORTED] ?: false
+    }
 
-    suspend fun markSampleDataImported() {
-        context.dataStore.edit { it[Keys.SAMPLE_DATA_IMPORTED] = true }
+    suspend fun markOnboardingDone() {
+        context.dataStore.edit { it[Keys.ONBOARDING_DONE] = true }
     }
 }

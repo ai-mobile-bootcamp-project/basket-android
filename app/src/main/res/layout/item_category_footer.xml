@@ -10,10 +10,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addCategoryButton"
-        style="@style/Widget.Material3.Button.TonalButton.Icon"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:minHeight="48dp"
         android:text="@string/add_category"
         app:icon="@drawable/ic_add" />

@@ -1,6 +1,5 @@
 package com.basket.ui.browse
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -24,13 +22,15 @@ import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -40,10 +40,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -55,6 +56,15 @@ import com.basket.ui.theme.BasketMoneyStyles
 import com.basket.ui.theme.basketColors
 
 private const val OUT_OF_STOCK_ALPHA = 0.5f
+
+/** The round + at the end of the card. */
+private val AddButtonSize = 48.dp
+
+/** Width of the compact stepper, including the touch areas of − and +. */
+private val StepperWidth = 104.dp
+
+/** Price you pay on a card: bold, a little smaller than the list-card total so both prices fit next to +. */
+private val CardPriceStyle = BasketMoneyStyles.Title.copy(fontWeight = FontWeight.Bold, fontSize = 20.sp, lineHeight = 26.sp)
 
 @Composable
 fun ProductCard(
@@ -70,7 +80,7 @@ fun ProductCard(
 
     Card(
         onClick = onOpen,
-        modifier = modifier.height(336.dp),
+        modifier = modifier.height(296.dp),
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(containerColor = Color.White),
     ) {
@@ -101,38 +111,43 @@ fun ProductCard(
                     )
                 }
             }
-            Column(
-                Modifier
+            Box(
+                modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
-                    .padding(start = 12.dp, end = 4.dp, top = 8.dp, bottom = 4.dp),
+                    .padding(start = 12.dp, end = 4.dp, top = 8.dp, bottom = 8.dp),
+                contentAlignment = Alignment.CenterStart,
             ) {
-                Text(
-                    text = product.title,
-                    style = MaterialTheme.typography.titleSmall,
-                    maxLines = 2,
-                    minLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(end = 8.dp),
-                )
-                Spacer(Modifier.weight(1f))
-                PricePair(product)
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    if (itemOnList != null) {
-                        CompactStepper(
-                            quantity = itemOnList.quantity,
-                            onDecrease = { onDecrease(itemOnList) },
-                            onIncrease = onAdd,
-                            increaseEnabled = !outOfStock && Quantity.canIncrease(itemOnList.quantity),
-                        )
-                    } else {
-                        FilledTonalIconButton(onClick = onAdd, enabled = !outOfStock) {
-                            Icon(Icons.Rounded.Add, contentDescription = null)
-                        }
+                Column(Modifier.fillMaxWidth()) {
+                    Text(
+                        text = product.title,
+                        style = MaterialTheme.typography.bodyLarge,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(
+                            end = if (itemOnList != null) StepperWidth + 4.dp else AddButtonSize + 8.dp,
+                        ),
+                    )
+                    PricePair(product, Modifier.padding(end = AddButtonSize + 8.dp))
+                }
+                if (itemOnList != null) {
+                    CompactStepper(
+                        quantity = itemOnList.quantity,
+                        onDecrease = { onDecrease(itemOnList) },
+                        onIncrease = onAdd,
+                        increaseEnabled = !outOfStock && Quantity.canIncrease(itemOnList.quantity),
+                        modifier = Modifier.align(Alignment.CenterEnd),
+                    )
+                } else {
+                    FilledIconButton(
+                        onClick = onAdd,
+                        enabled = !outOfStock,
+                        modifier = Modifier
+                            .align(Alignment.CenterEnd)
+                            .padding(end = 4.dp)
+                            .size(AddButtonSize),
+                    ) {
+                        Icon(Icons.Rounded.Add, contentDescription = null)
                     }
                 }
             }
@@ -141,19 +156,16 @@ fun ProductCard(
 }
 
 @Composable
-private fun PricePair(product: CatalogProduct) {
-    Row(
-        modifier = Modifier.padding(end = 8.dp),
-        verticalAlignment = Alignment.Bottom,
-    ) {
+private fun PricePair(product: CatalogProduct, modifier: Modifier = Modifier) {
+    Row(modifier = modifier) {
         Text(
             text = "$" + String.format("%.2f", product.priceYouPayCents / 100.0),
-            style = BasketMoneyStyles.Title,
+            style = CardPriceStyle,
             maxLines = 1,
             modifier = Modifier.alignByBaseline(),
         )
         if (product.discountBadgePercent != null) {
-            Spacer(Modifier.width(6.dp))
+            Spacer(Modifier.width(4.dp))
             Text(
                 text = "$" + String.format("%.2f", product.originalPriceCents / 100.0),
                 style = BasketMoneyStyles.Small,
@@ -166,7 +178,10 @@ private fun PricePair(product: CatalogProduct) {
     }
 }
 
-/** − quantity + on a product card. The number is the quantity already on the list. */
+/**
+ * "− 6 +" pill on a product card. The number is the quantity already on the list. The pill is 40 dp high;
+ * − and + keep 48 dp touch targets that reach slightly past its ends.
+ */
 @Composable
 fun CompactStepper(
     quantity: Int,
@@ -175,24 +190,27 @@ fun CompactStepper(
     increaseEnabled: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    Surface(
-        modifier = modifier,
-        shape = CircleShape,
-        color = MaterialTheme.colorScheme.primaryContainer,
-        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            IconButton(onClick = onDecrease) {
+    CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onPrimaryContainer) {
+        Box(modifier = modifier.width(StepperWidth), contentAlignment = Alignment.Center) {
+            Box(
+                Modifier
+                    .matchParentSize()
+                    .padding(4.dp)
+                    .background(MaterialTheme.colorScheme.primaryContainer, CircleShape),
+            )
+            IconButton(onClick = onDecrease, modifier = Modifier.align(Alignment.CenterStart)) {
                 Icon(Icons.Rounded.Remove, contentDescription = null)
             }
             Text(
                 text = quantity.toString(),
                 style = MaterialTheme.typography.titleMedium,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.widthIn(min = 24.dp),
+                maxLines = 1,
             )
-            IconButton(onClick = onIncrease, enabled = increaseEnabled) {
+            IconButton(
+                onClick = onIncrease,
+                enabled = increaseEnabled,
+                modifier = Modifier.align(Alignment.CenterEnd),
+            ) {
                 Icon(Icons.Rounded.Add, contentDescription = null)
             }
         }
@@ -241,7 +259,7 @@ private fun DiscountBadge(percent: Int, modifier: Modifier = Modifier) {
     ) {
         Text(
             text = stringResource(R.string.discount_badge, percent),
-            style = MaterialTheme.typography.labelMedium,
+            style = MaterialTheme.typography.labelLarge,
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
         )
     }

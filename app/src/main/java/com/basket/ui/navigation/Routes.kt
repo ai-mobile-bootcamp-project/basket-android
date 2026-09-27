@@ -2,6 +2,7 @@ package com.basket.ui.navigation
 
 import kotlinx.serialization.Serializable
 
+@Serializable data object WelcomeDestination
 @Serializable data object ListsDestination
 @Serializable data class ListDetailDestination(val listId: Long)
 

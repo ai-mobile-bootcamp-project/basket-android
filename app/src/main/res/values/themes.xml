@@ -37,6 +37,7 @@
         <item name="colorSurfaceInverse">@color/bk_inverse_surface</item>
         <item name="colorOnSurfaceInverse">@color/bk_inverse_on_surface</item>
         <item name="colorPrimaryInverse">@color/bk_inverse_primary</item>
+        <item name="colorControlNormal">@color/bk_on_surface_variant</item>
 
         <item name="colorSuccess">@color/bk_success</item>
         <item name="colorOnSuccess">@color/bk_on_success</item>

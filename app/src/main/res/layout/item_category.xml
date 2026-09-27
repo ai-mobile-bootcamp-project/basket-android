@@ -7,9 +7,9 @@
     android:background="#FFFFFF"
     android:foreground="?attr/selectableItemBackground"
     android:gravity="center_vertical"
-    android:minHeight="72dp"
+    android:minHeight="64dp"
     android:orientation="horizontal"
-    android:paddingLeft="4dp"
+    android:paddingLeft="20dp"
     android:paddingEnd="4dp">
 
     <ImageView
@@ -27,18 +27,30 @@
         android:layout_height="48dp"
         android:contentDescription="@string/cd_locked_category"
         android:scaleType="center"
-        android:src="@drawable/ic_lock"
+        android:src="@drawable/category_lock"
         android:visibility="gone"
         app:tint="?attr/colorOnSurfaceVariant" />
+
+    <TextView
+        android:id="@+id/emoji"
+        android:layout_width="32sp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:importantForAccessibility="no"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="24sp"
+        tools:text="🍎" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="4dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp">
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/name"
@@ -48,23 +60,24 @@
             android:gravity="left|center_vertical"
             android:maxLines="2"
             android:textAppearance="?attr/textAppearanceBodyLarge"
-            android:textColor="?attr/colorOnSurface" />
+            android:textColor="?attr/colorOnSurface"
+            tools:text="Fruit &amp; veg" />
 
         <TextView
             android:id="@+id/itemCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
             android:textAlignment="viewStart"
             android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?attr/colorOnSurfaceVariant" />
+            android:textColor="?attr/colorOnSurfaceVariant"
+            tools:text="6 items" />
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/overflow"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginRight="4dp"
+        android:layout_marginRight="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/cd_more_options"
         android:scaleType="center"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground">
@@ -36,95 +37,132 @@
                 <!-- Appearance -->
 
                 <TextView
+                    android:id="@+id/appearanceHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:accessibilityHeading="true"
                     android:paddingStart="16dp"
                     android:paddingTop="16dp"
                     android:paddingEnd="16dp"
                     android:paddingBottom="8dp"
-                    android:text="@string/settings_section_appearance"
                     android:textAppearance="?attr/textAppearanceTitleSmall"
-                    android:textColor="?attr/colorPrimary" />
+                    android:textColor="?attr/colorPrimary"
+                    android:text="@string/settings_section_appearance" />
 
                 <LinearLayout
                     android:id="@+id/themeRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:minHeight="72dp"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:paddingStart="16dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="16dp"
-                    android:paddingBottom="8dp">
+                    android:paddingBottom="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_theme"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:textColor="?attr/colorOnSurface" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:importantForAccessibility="no"
+                        app:tint="?attr/colorOnSurfaceVariant"
+                        android:src="@drawable/settings_contrast"
+                        tools:ignore="ContentDescription" />
 
-                    <TextView
-                        android:id="@+id/themeValue"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurfaceVariant" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnSurface"
+                            android:text="@string/setting_theme" />
+
+                        <TextView
+                            android:id="@+id/themeValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            tools:text="System" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/languageRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:minHeight="72dp"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:paddingStart="16dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="16dp"
-                    android:paddingBottom="8dp">
+                    android:paddingBottom="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_language"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:textColor="?attr/colorOnSurface" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:importantForAccessibility="no"
+                        app:tint="?attr/colorOnSurfaceVariant"
+                        android:src="@drawable/settings_language"
+                        tools:ignore="ContentDescription" />
 
-                    <TextView
-                        android:id="@+id/languageValue"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurfaceVariant" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnSurface"
+                            android:text="@string/setting_language" />
+
+                        <TextView
+                            android:id="@+id/languageValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            tools:text="System" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="8dp"
+                    app:dividerColor="?attr/colorOutlineVariant"
+                    app:dividerInsetEnd="16dp"
+                    app:dividerInsetStart="16dp" />
 
                 <!-- Lists -->
 
                 <TextView
+                    android:id="@+id/listsHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:accessibilityHeading="true"
                     android:paddingStart="16dp"
                     android:paddingTop="16dp"
                     android:paddingEnd="16dp"
                     android:paddingBottom="8dp"
-                    android:text="@string/settings_section_lists"
                     android:textAppearance="?attr/textAppearanceTitleSmall"
-                    android:textColor="?attr/colorPrimary" />
+                    android:textColor="?attr/colorPrimary"
+                    android:text="@string/settings_section_lists" />
 
                 <LinearLayout
                     android:id="@+id/moveTickedRow"
@@ -137,9 +175,18 @@
                     android:minHeight="72dp"
                     android:orientation="horizontal"
                     android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="16dp"
-                    android:paddingBottom="8dp">
+                    android:paddingBottom="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:importantForAccessibility="no"
+                        app:tint="?attr/colorOnSurfaceVariant"
+                        android:src="@drawable/settings_low_priority"
+                        tools:ignore="ContentDescription" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -151,16 +198,16 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/setting_move_ticked"
                             android:textAppearance="?attr/textAppearanceBodyLarge"
-                            android:textColor="?attr/colorOnSurface" />
+                            android:textColor="?attr/colorOnSurface"
+                            android:text="@string/setting_move_ticked" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/setting_move_ticked_summary"
                             android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:textColor="?attr/colorOnSurfaceVariant" />
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:text="@string/setting_move_ticked_summary" />
                     </LinearLayout>
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -169,144 +216,309 @@
                         android:layout_height="wrap_content"
                         android:clickable="false"
                         android:focusable="false"
-                        android:importantForAccessibility="no" />
+                        android:importantForAccessibility="no"
+                        app:thumbIcon="@drawable/settings_switch_thumb_icon" />
                 </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/categoriesRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:drawableRight="@drawable/ic_chevron_right"
-                    android:drawablePadding="16dp"
-                    android:drawableTint="?attr/colorOnSurfaceVariant"
-                    android:focusable="true"
-                    android:gravity="left|center_vertical"
-                    android:minHeight="56dp"
+                    android:gravity="center_vertical"
+                    android:minHeight="72dp"
+                    android:orientation="horizontal"
                     android:paddingStart="16dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="16dp"
-                    android:text="@string/setting_categories"
-                    android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:textColor="?attr/colorOnSurface" />
+                    android:paddingBottom="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:importantForAccessibility="no"
+                        app:tint="?attr/colorOnSurfaceVariant"
+                        android:src="@drawable/settings_category"
+                        tools:ignore="ContentDescription" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnSurface"
+                            android:gravity="left|center_vertical"
+                            android:text="@string/setting_categories" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:text="@string/setting_categories_summary" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="16dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/settings_chevron"
+                        app:tint="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
 
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="8dp"
+                    app:dividerColor="?attr/colorOutlineVariant"
+                    app:dividerInsetEnd="16dp"
+                    app:dividerInsetStart="16dp" />
 
                 <!-- Data -->
 
                 <TextView
+                    android:id="@+id/dataHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:accessibilityHeading="true"
                     android:paddingStart="16dp"
                     android:paddingTop="16dp"
                     android:paddingEnd="16dp"
                     android:paddingBottom="8dp"
-                    android:text="@string/settings_section_data"
                     android:textAppearance="?attr/textAppearanceTitleSmall"
-                    android:textColor="?attr/colorPrimary" />
+                    android:textColor="?attr/colorPrimary"
+                    android:text="@string/settings_section_data" />
 
                 <LinearLayout
                     android:id="@+id/refreshRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:minHeight="72dp"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:paddingStart="16dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="16dp"
-                    android:paddingBottom="8dp">
+                    android:paddingBottom="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                    <TextView
-                        android:id="@+id/refreshTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_refresh_catalog"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:textColor="?attr/colorOnSurface" />
+                    <ImageView
+                        android:id="@+id/refreshIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:importantForAccessibility="no"
+                        app:tint="?attr/colorOnSurfaceVariant"
+                        android:src="@drawable/settings_sync"
+                        tools:ignore="ContentDescription" />
 
-                    <TextView
-                        android:id="@+id/lastUpdated"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorOnSurfaceVariant" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <com.google.android.material.progressindicator.LinearProgressIndicator
-                        android:id="@+id/refreshProgress"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:indeterminate="true"
-                        android:visibility="gone" />
+                        <TextView
+                            android:id="@+id/refreshTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnSurface"
+                            android:text="@string/setting_refresh_catalog" />
+
+                        <TextView
+                            android:id="@+id/lastUpdated"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            tools:text="Last updated 25 Sep, 09:14" />
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/refreshProgress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:indeterminate="true"
+                            android:visibility="gone" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/resetRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:focusable="true"
                     android:gravity="center_vertical"
-                    android:minHeight="56dp"
+                    android:minHeight="72dp"
+                    android:orientation="horizontal"
                     android:paddingStart="16dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="16dp"
-                    android:text="@string/setting_reset"
-                    android:textAlignment="viewStart"
-                    android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:textColor="?attr/colorError" />
+                    android:paddingBottom="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/settings_restart"
+                        app:tint="?attr/colorError"
+                        tools:ignore="ContentDescription" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:text="@string/setting_reset"
+                            android:textColor="?attr/colorError" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:text="@string/setting_reset_summary" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="8dp"
+                    app:dividerColor="?attr/colorOutlineVariant"
+                    app:dividerInsetEnd="16dp"
+                    app:dividerInsetStart="16dp" />
 
                 <!-- About -->
 
                 <TextView
+                    android:id="@+id/aboutHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:accessibilityHeading="true"
                     android:paddingStart="16dp"
                     android:paddingTop="16dp"
                     android:paddingEnd="16dp"
                     android:paddingBottom="8dp"
-                    android:text="About"
                     android:textAppearance="?attr/textAppearanceTitleSmall"
-                    android:textColor="?attr/colorPrimary" />
+                    android:textColor="?attr/colorPrimary"
+                    android:text="About" />
 
-                <TextView
-                    android:id="@+id/versionText"
+                <LinearLayout
+                    android:id="@+id/versionRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:minHeight="56dp"
+                    android:minHeight="72dp"
+                    android:orientation="horizontal"
                     android:paddingStart="16dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="16dp"
-                    android:textAlignment="viewStart"
-                    android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:textColor="?attr/colorOnSurface" />
+                    android:paddingBottom="16dp">
 
-                <TextView
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:importantForAccessibility="no"
+                        app:tint="?attr/colorOnSurfaceVariant"
+                        android:src="@drawable/settings_info"
+                        tools:ignore="ContentDescription" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnSurface"
+                            android:text="@string/setting_version" />
+
+                        <TextView
+                            android:id="@+id/versionValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            tools:text="1.0.0" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/dataCreditRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:focusable="true"
                     android:gravity="center_vertical"
-                    android:minHeight="56dp"
+                    android:minHeight="72dp"
+                    android:orientation="horizontal"
                     android:paddingStart="16dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="16dp"
-                    android:text="@string/data_credit"
-                    android:textAlignment="viewStart"
-                    android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:textColor="?attr/colorOnSurface" />
+                    android:paddingBottom="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:importantForAccessibility="no"
+                        app:tint="?attr/colorOnSurfaceVariant"
+                        android:src="@drawable/settings_database"
+                        tools:ignore="ContentDescription" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnSurface"
+                            android:text="@string/setting_product_data" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:text="@string/setting_product_data_summary" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="16dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/settings_open_in_new"
+                        app:tint="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

@@ -1,7 +1,12 @@
 package com.basket.ui.item
 
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +30,7 @@ import com.basket.databinding.FragmentItemFormBinding
 import com.basket.domain.Category
 import com.basket.ui.common.appLocale
 import com.basket.ui.common.displayName
+import com.basket.ui.common.emoji
 import com.basket.ui.common.formatMoney
 import com.basket.ui.navigation.BasketNavigator
 import com.google.android.material.color.MaterialColors
@@ -48,6 +54,8 @@ class ItemFormFragment : Fragment() {
     private val navigator: BasketNavigator get() = requireActivity() as BasketNavigator
 
     private var categories: List<Category> = emptyList()
+    private var categoryAdapter: CategoryOptionAdapter? = null
+    private var categoryEmoji: String? = null
     private var suggestions: List<String> = emptyList()
     private var savingIcon: Drawable? = null
     private var backCallback: OnBackPressedCallback? = null
@@ -100,8 +108,11 @@ class ItemFormFragment : Fragment() {
         }
 
         binding.priceInput.doAfterTextChanged { viewModel.onPriceChanged(it?.toString().orEmpty()) }
-        binding.categoryInput.setOnItemClickListener { _, _, position, _ ->
-            categories.getOrNull(position)?.let { viewModel.onCategorySelected(it.id) }
+        val adapter = CategoryOptionAdapter(requireContext(), layoutInflater)
+        categoryAdapter = adapter
+        binding.categoryInput.setAdapter(adapter)
+        binding.categoryInput.setOnItemClickListener { parent, _, position, _ ->
+            (parent.getItemAtPosition(position) as? CategoryOption)?.let { viewModel.onCategorySelected(it.id) }
         }
         binding.noteInput.doAfterTextChanged { viewModel.onNoteChanged(it?.toString().orEmpty()) }
         binding.saveButton.setOnClickListener { viewModel.save() }
@@ -149,16 +160,32 @@ class ItemFormFragment : Fragment() {
         if (unit != null) {
             val quantity = state.quantity
             val total = unit * quantity
-            binding.lineTotal.text = "$quantity × $" + String.format("%.2f", unit / 100.0) + " = $" + String.format("%.2f", total / 100.0)
+            val line = "$quantity × $" + String.format("%.2f", unit / 100.0) + " = $" + String.format("%.2f", total / 100.0)
+            val totalStart = line.lastIndexOf(" = ") + 3
+            binding.lineTotal.text = SpannableString(line).apply {
+                setSpan(StyleSpan(Typeface.BOLD), totalStart, line.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                setSpan(
+                    ForegroundColorSpan(MaterialColors.getColor(binding.lineTotal, com.google.android.material.R.attr.colorOnSurface)),
+                    totalStart,
+                    line.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
+                )
+            }
         }
 
-        // Category
+        // Category: emoji (decorative) + name
         if (state.categories != categories) {
             categories = state.categories
-            binding.categoryInput.setSimpleItems(categories.map { it.displayName(context) }.toTypedArray())
+            categoryAdapter?.submit(categories.map { CategoryOption(it.id, it.emoji, it.displayName(context)) })
         }
-        val categoryName = state.selectedCategory?.displayName(context).orEmpty()
+        val selected = state.selectedCategory
+        val categoryName = selected?.displayName(context).orEmpty()
         if (binding.categoryInput.text.toString() != categoryName) binding.categoryInput.setText(categoryName, false)
+        val emoji = selected?.emoji
+        if (emoji != categoryEmoji) {
+            categoryEmoji = emoji
+            binding.categoryLayout.startIconDrawable = emoji?.let { EmojiDrawable(context, it) }
+        }
 
         // Note
         if (binding.noteInput.text.toString() != state.fields.note) {
@@ -253,6 +280,8 @@ class ItemFormFragment : Fragment() {
         backCallback = null
         savingIcon = null
         categories = emptyList()
+        categoryAdapter = null
+        categoryEmoji = null
         suggestions = emptyList()
         _binding = null
         super.onDestroyView()

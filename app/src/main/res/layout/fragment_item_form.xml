@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground"
+    android:background="?attr/colorSurface"
     android:orientation="vertical">
 
-    <!-- Top app bar -->
+    <!-- Top app bar: close, title, delete (edit mode) -->
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="12dp"
             android:layout_weight="1"
             android:accessibilityHeading="true"
             android:ellipsize="end"
@@ -40,7 +40,7 @@
             android:maxLines="2"
             android:textAppearance="?attr/textAppearanceTitleLarge"
             android:textColor="?attr/colorOnSurface"
-            tools:text="@string/add_item_title" />
+            tools:text="@string/edit_item_title" />
 
         <ImageButton
             android:id="@+id/deleteButton"
@@ -49,7 +49,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_delete"
             android:visibility="gone"
-            app:tint="?attr/colorOnSurfaceVariant"
+            app:tint="?attr/colorError"
             tools:visibility="visible" />
     </LinearLayout>
 
@@ -72,6 +72,7 @@
             <!-- Name -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameLayout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/field_name"
@@ -80,6 +81,7 @@
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/nameInput"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:completionThreshold="1"
@@ -89,71 +91,86 @@
                     android:textAlignment="viewStart" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Quantity stepper -->
-            <TextView
-                android:id="@+id/quantityLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:labelFor="@id/quantityInput"
-                android:text="@string/field_quantity"
-                android:textAppearance="?attr/textAppearanceLabelLarge"
-                android:textColor="?attr/colorOnSurfaceVariant" />
-
+            <!-- Quantity: label at the start, pill stepper at the end -->
             <LinearLayout
-                android:id="@+id/quantityStepper"
-                android:layout_width="wrap_content"
+                android:id="@+id/quantityRow"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/decreaseButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/item_stepper_button_bg"
-                    android:src="@drawable/ic_remove"
-                    app:tint="?attr/colorOnSurface" />
+                <TextView
+                    android:id="@+id/quantityLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:labelFor="@id/quantityInput"
+                    android:text="@string/field_quantity"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="?attr/colorOnSurface" />
 
-                <EditText
-                    android:id="@+id/quantityInput"
+                <LinearLayout
+                    android:id="@+id/quantityStepper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/item_quantity_field_bg"
-                    android:gravity="center"
-                    android:imeOptions="actionNext"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    android:minWidth="72dp"
-                    android:minHeight="48dp"
-                    android:paddingStart="12dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="12dp"
-                    android:paddingBottom="8dp"
-                    android:selectAllOnFocus="true"
-                    android:textAppearance="@style/TextAppearance.Basket.Money.Title"
-                    android:textColor="?attr/colorOnSurface"
-                    tools:text="6" />
+                    android:background="@drawable/stepper_bg"
+                    android:gravity="center_vertical"
+                    android:minHeight="56dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp">
 
-                <ImageButton
-                    android:id="@+id/increaseButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/item_stepper_button_bg"
-                    android:src="@drawable/ic_add"
-                    app:tint="?attr/colorOnSurface" />
+                    <ImageButton
+                        android:id="@+id/decreaseButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/stepper_button_bg"
+                        android:src="@drawable/ic_remove"
+                        app:tint="?attr/colorPrimary" />
+
+                    <EditText
+                        android:id="@+id/quantityInput"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/item_quantity_field_bg"
+                        android:gravity="center"
+                        android:imeOptions="actionNext"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:minWidth="36dp"
+                        android:minHeight="48dp"
+                        android:paddingStart="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="4dp"
+                        android:paddingBottom="4dp"
+                        android:selectAllOnFocus="true"
+                        android:textAppearance="@style/TextAppearance.Basket.Money.Title"
+                        android:textColor="?attr/colorOnSurface"
+                        tools:text="6" />
+
+                    <ImageButton
+                        android:id="@+id/increaseButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/stepper_button_bg"
+                        android:src="@drawable/ic_add"
+                        app:tint="?attr/colorPrimary" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Unit price -->
+            <!-- Unit price + live line total -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/priceLayout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Unit price"
+                android:hint="Unit price (optional)"
                 app:prefixText="$">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -181,7 +198,7 @@
                 tools:text="6 × $1.74 = $10.44"
                 tools:visibility="visible" />
 
-            <!-- Category -->
+            <!-- Category (emoji start icon is set in code) -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/categoryLayout"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -201,12 +218,14 @@
             <!-- Note -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/noteLayout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="@string/field_note"
                 app:counterEnabled="true"
                 app:counterMaxLength="80"
+                app:expandedHintEnabled="false"
                 app:placeholderText="@string/note_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -231,6 +250,8 @@
         android:layout_marginBottom="16dp"
         android:enabled="false"
         android:minHeight="56dp"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
         app:iconGravity="textStart"
-        tools:text="Add to Weekly shop" />
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+        tools:text="@string/save_changes" />
 </LinearLayout>

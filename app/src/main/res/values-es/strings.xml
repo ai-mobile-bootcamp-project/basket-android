@@ -73,8 +73,6 @@
     <string name="menu_finish_shopping">Terminar la compra</string>
     <string name="section_header">%1$s · %2$d</string>
     <string name="in_basket_header">En la cesta · %d</string>
-    <string name="totals_total">Total %1$s</string>
-    <string name="totals_in_basket">En la cesta %1$s</string>
     <plurals name="items_without_price">
         <item quantity="one">%d artículo sin precio</item>
         <item quantity="many">%d artículos sin precio</item>
@@ -86,16 +84,6 @@
     <string name="item_quantity_price">%1$d × %2$s</string>
     <string name="price_missing">—</string>
     <string name="item_removed">%1$s quitado</string>
-    <plurals name="clear_basket_title">
-        <item quantity="one">¿Quitar %d artículo de la cesta?</item>
-        <item quantity="many">¿Quitar %d artículos de la cesta?</item>
-        <item quantity="other">¿Quitar %d artículos de la cesta?</item>
-    </plurals>
-    <plurals name="clear_basket_message">
-        <item quantity="one">El %d artículo que falta por comprar se queda en la lista.</item>
-        <item quantity="many">Los %d artículos que faltan por comprar se quedan en la lista.</item>
-        <item quantity="other">Los %d artículos que faltan por comprar se quedan en la lista.</item>
-    </plurals>
     <plurals name="finish_summary">
         <item quantity="one">%1$d de %2$d comprado · %3$s gastados</item>
         <item quantity="many">%1$d de %2$d comprados · %3$s gastados</item>
@@ -123,10 +111,10 @@
     <string name="edit_item_title">Editar artículo</string>
     <string name="field_name">Nombre</string>
     <string name="field_quantity">Cantidad</string>
-    <string name="field_unit_price">Precio por unidad</string>
+    <string name="field_unit_price">Precio por unidad (opcional)</string>
     <string name="field_category">Categoría</string>
-    <string name="field_note">Nota</string>
-    <string name="note_hint">p. ej., en rodajas</string>
+    <string name="field_note">Nota (opcional)</string>
+    <string name="note_hint">p. ej., en rodajas, el grande</string>
     <string name="line_total">%1$d × %2$s = %3$s</string>
     <string name="add_to_list">Añadir a %1$s</string>
     <string name="save_changes">Guardar cambios</string>
@@ -209,7 +197,7 @@
     <string name="setting_language">Idioma</string>
     <string name="language_system">Sistema</string>
     <string name="setting_move_ticked">Bajar los artículos marcados</string>
-    <string name="setting_move_ticked_summary">Los artículos marcados pasan a En la cesta, al final de cada lista</string>
+    <string name="setting_move_ticked_summary">Los artículos marcados pasan a En la cesta, al final</string>
     <string name="setting_categories">Categorías</string>
     <string name="setting_refresh_catalog">Actualizar el catálogo</string>
     <string name="last_updated">Actualizado el %1$s</string>
@@ -219,6 +207,19 @@
     <string name="reset_title">¿Restablecer todas las listas?</string>
     <string name="reset_message">Tus listas y categorías se sustituirán por los datos de ejemplo. No se puede deshacer.</string>
     <string name="reset_confirm">Restablecer</string>
-    <string name="version">Versión %1$s</string>
-    <string name="data_credit">Datos de productos: DummyJSON (dummyjson.com)</string>
+
+    <!-- Design refresh -->
+    <string name="totals_total_label">Total</string>
+    <string name="totals_in_basket_label">En la cesta</string>
+    <plurals name="items_removed">
+        <item quantity="one">%d artículo quitado</item>
+        <item quantity="many">%d artículos quitados</item>
+        <item quantity="other">%d artículos quitados</item>
+    </plurals>
+    <string name="category_no_items">Sin artículos</string>
+    <string name="setting_categories_summary">Orden de pasillos para todas las listas</string>
+    <string name="setting_reset_summary">Sustituye las listas y las categorías</string>
+    <string name="setting_version">Versión</string>
+    <string name="setting_product_data">Datos de productos</string>
+    <string name="setting_product_data_summary">DummyJSON (dummyjson.com)</string>
 </resources>

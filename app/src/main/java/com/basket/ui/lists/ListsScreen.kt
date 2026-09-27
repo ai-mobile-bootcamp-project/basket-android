@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -61,6 +62,9 @@ import com.basket.R
 import com.basket.ui.theme.BasketMoneyStyles
 import com.basket.ui.theme.basketColors
 import kotlinx.coroutines.launch
+
+/** The progress bar runs under the name and count only, not under the total. */
+private const val PROGRESS_WIDTH_FRACTION = 0.64f
 
 @Composable
 fun ListsRoute(onOpenList: (Long) -> Unit, onOpenSettings: () -> Unit) {
@@ -127,6 +131,8 @@ fun ListsScreen(
             if (state.cards.isNotEmpty()) {
                 ExtendedFloatingActionButton(
                     onClick = { showNewList = true },
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     icon = { Icon(Icons.Rounded.Add, contentDescription = null) },
                     text = { Text(stringResource(R.string.new_list)) },
                 )
@@ -208,96 +214,110 @@ private fun ListCard(
             contentColor = MaterialTheme.colorScheme.onSurface,
         ),
     ) {
-        Column(Modifier.padding(start = 16.dp, top = 12.dp, end = 4.dp, bottom = 16.dp)) {
-            Row(verticalAlignment = Alignment.Top) {
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(top = 4.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
-                ) {
-                    Text(
-                        card.name,
-                        style = MaterialTheme.typography.titleMedium,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                    if (card.isEmpty) {
+        Row(
+            modifier = Modifier.padding(start = 16.dp, end = 4.dp),
+            verticalAlignment = Alignment.Top,
+        ) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(top = 16.dp, bottom = 16.dp),
+            ) {
+                Row(verticalAlignment = Alignment.Top) {
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
                         Text(
-                            stringResource(R.string.list_card_no_items),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            card.name,
+                            style = MaterialTheme.typography.titleMedium,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis,
                         )
-                    } else {
                         Text(
-                            pluralStringResource(R.plurals.list_card_progress, card.itemCount, card.tickedCount, card.itemCount),
+                            if (card.isEmpty) {
+                                stringResource(R.string.list_card_no_items)
+                            } else {
+                                pluralStringResource(R.plurals.list_card_progress, card.itemCount, card.tickedCount, card.itemCount)
+                            },
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
-                }
-                if (!card.isEmpty) {
-                    Column(
-                        horizontalAlignment = Alignment.End,
-                        modifier = Modifier
-                            .weight(1f, fill = false)
-                            .padding(start = 12.dp, top = 4.dp),
-                    ) {
-                        Text(
-                            "$" + String.format("%.2f", card.totalCents / 100.0),
-                            style = BasketMoneyStyles.Title,
-                            textAlign = TextAlign.End,
-                        )
-                        if (card.withoutPriceCount > 0) {
+                    if (!card.isEmpty) {
+                        Column(
+                            horizontalAlignment = Alignment.End,
+                            modifier = Modifier
+                                .widthIn(max = 180.dp)
+                                .padding(start = 12.dp),
+                        ) {
                             Text(
-                                "+ ${card.withoutPriceCount} " + stringResource(R.string.without_price),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                "$" + String.format("%.2f", card.totalCents / 100.0),
+                                style = BasketMoneyStyles.Title,
                                 textAlign = TextAlign.End,
                             )
+                            if (card.withoutPriceCount > 0) {
+                                Text(
+                                    "+ ${card.withoutPriceCount} " + stringResource(R.string.without_price),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    textAlign = TextAlign.End,
+                                    modifier = Modifier.padding(top = 4.dp),
+                                )
+                            }
                         }
                     }
                 }
-                ListCardMenu(onRename = onRename, onDuplicate = onDuplicate, onDelete = onDelete)
-            }
-            if (!card.isEmpty) {
-                Spacer(Modifier.height(12.dp))
-                LinearProgressIndicator(
-                    progress = { card.percentDone.toFloat() },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(end = 12.dp),
-                    color = MaterialTheme.colorScheme.primary,
-                    trackColor = MaterialTheme.colorScheme.primaryContainer,
-                )
-            }
-            if (card.isDone) {
-                Row(
-                    modifier = Modifier.padding(top = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                ) {
-                    Icon(
-                        Icons.Rounded.CheckCircle,
-                        contentDescription = null,
-                        tint = MaterialTheme.basketColors.success,
-                        modifier = Modifier.size(18.dp),
-                    )
-                    Text(
-                        "Done",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.basketColors.success,
+                if (!card.isEmpty) {
+                    Spacer(Modifier.height(12.dp))
+                    LinearProgressIndicator(
+                        progress = { card.percentDone.toFloat() },
+                        modifier = Modifier.fillMaxWidth(PROGRESS_WIDTH_FRACTION),
+                        color = MaterialTheme.colorScheme.primary,
+                        trackColor = MaterialTheme.colorScheme.primaryContainer,
+                        gapSize = 0.dp,
+                        drawStopIndicator = {},
                     )
                 }
+                if (card.isDone) {
+                    Row(
+                        modifier = Modifier.padding(top = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        Icon(
+                            Icons.Rounded.CheckCircle,
+                            contentDescription = null,
+                            tint = MaterialTheme.basketColors.success,
+                            modifier = Modifier.size(18.dp),
+                        )
+                        Text(
+                            "Done",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.basketColors.success,
+                        )
+                    }
+                }
             }
+            ListCardMenu(
+                onRename = onRename,
+                onDuplicate = onDuplicate,
+                onDelete = onDelete,
+                modifier = Modifier.padding(top = 4.dp),
+            )
         }
     }
 }
 
 @Composable
-private fun ListCardMenu(onRename: () -> Unit, onDuplicate: () -> Unit, onDelete: () -> Unit) {
+private fun ListCardMenu(
+    onRename: () -> Unit,
+    onDuplicate: () -> Unit,
+    onDelete: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     var expanded by remember { mutableStateOf(false) }
-    Box {
+    Box(modifier) {
         IconButton(onClick = { expanded = true }) {
             Icon(Icons.Rounded.MoreVert, contentDescription = stringResource(R.string.cd_more_options))
         }

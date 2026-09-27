@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Screen 5 — Product detail. -->
+<!-- Screen 5 — Product detail. Edge-to-edge: the image runs under the status bar; the back button is offset in code. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground"
+    android:background="?attr/colorSurface"
     android:orientation="vertical">
 
     <FrameLayout
@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!-- 1:1 image area -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -48,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingStart="16dp"
-                    android:paddingTop="16dp"
+                    android:paddingTop="20dp"
                     android:paddingEnd="16dp"
                     android:paddingBottom="24dp">
 
@@ -63,27 +64,44 @@
                         android:textColor="?attr/colorOnSurface"
                         tools:text="Apple" />
 
-                    <TextView
-                        android:id="@+id/category"
+                    <!-- Category tag: decorative emoji + name -->
+                    <LinearLayout
+                        android:id="@+id/categoryTag"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="left"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/product_label_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
                         android:paddingStart="8dp"
                         android:paddingTop="2dp"
                         android:paddingEnd="8dp"
-                        android:paddingBottom="2dp"
-                        android:textAppearance="?attr/textAppearanceLabelMedium"
-                        android:textColor="?attr/colorOnSecondaryContainer"
-                        tools:text="@string/category_fruit_veg" />
+                        android:paddingBottom="2dp">
 
-                    <!-- Price block -->
-                    <LinearLayout
+                        <TextView
+                            android:id="@+id/categoryEmoji"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="6dp"
+                            android:importantForAccessibility="no"
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            tools:text="🍎" />
+
+                        <TextView
+                            android:id="@+id/category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSecondaryContainer"
+                            tools:text="@string/category_fruit_veg" />
+                    </LinearLayout>
+
+                    <!-- Price you pay, original struck through, "Save n%" badge; wraps at large font sizes -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:baselineAligned="true"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="12dp">
 
                         <TextView
                             android:id="@+id/price"
@@ -95,30 +113,41 @@
 
                         <TextView
                             android:id="@+id/originalPrice"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_weight="1"
                             android:textAppearance="@style/TextAppearance.Basket.Money.Body"
                             android:textColor="?attr/colorOnSurfaceVariant"
                             tools:text="$1.99" />
-                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/discountBadge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/product_badge_bg"
-                        android:paddingStart="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingEnd="8dp"
-                        android:paddingBottom="4dp"
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnTertiaryContainer"
-                        tools:text="Save 13%" />
+                        <TextView
+                            android:id="@+id/discountBadge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/product_badge_bg"
+                            android:paddingStart="8dp"
+                            android:paddingTop="2dp"
+                            android:paddingEnd="8dp"
+                            android:paddingBottom="2dp"
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnTertiaryContainer"
+                            tools:text="Save 13%" />
 
-                    <!-- Stock -->
+                        <androidx.constraintlayout.helper.widget.Flow
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:constraint_referenced_ids="price,originalPrice,discountBadge"
+                            app:flow_horizontalBias="0"
+                            app:flow_horizontalGap="12dp"
+                            app:flow_horizontalStyle="packed"
+                            app:flow_verticalAlign="baseline"
+                            app:flow_verticalGap="4dp"
+                            app:flow_wrapMode="chain"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- Stock: icon + text, coloured by state -->
                     <TextView
                         android:id="@+id/stock"
                         android:layout_width="match_parent"
@@ -128,34 +157,22 @@
                         android:gravity="center_vertical"
                         android:textAlignment="viewStart"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
-                        tools:drawableStartCompat="@drawable/ic_check_circle"
+                        tools:drawableStartCompat="@drawable/product_ic_stock_in"
                         tools:text="@string/stock_in" />
 
-                    <!-- Description (English, from the API) -->
+                    <!-- Description (English, from the API): 4 lines with an inline More / Less -->
                     <TextView
                         android:id="@+id/description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:ellipsize="end"
-                        android:maxLines="4"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:textColor="?attr/colorOnSurface"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:textColor="?attr/colorOnSurfaceVariant"
                         android:textDirection="ltr"
                         tools:text="Fresh and crisp apples, perfect for snacking or incorporating into various recipes." />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/moreButton"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:minWidth="48dp"
-                        android:visibility="gone"
-                        tools:text="@string/action_more"
-                        tools:visibility="visible" />
-
-                    <!-- Rating -->
+                    <!-- Rating: stars + the number, read as one phrase -->
                     <LinearLayout
                         android:id="@+id/ratingRow"
                         android:layout_width="wrap_content"
@@ -166,28 +183,61 @@
                         android:minHeight="48dp"
                         android:orientation="horizontal">
 
-                        <RatingBar
-                            android:id="@+id/ratingBar"
-                            style="?android:attr/ratingBarStyleSmall"
+                        <LinearLayout
+                            android:id="@+id/ratingStars"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:importantForAccessibility="no"
-                            android:isIndicator="true"
-                            android:numStars="5"
-                            android:progressBackgroundTint="?attr/colorOutlineVariant"
-                            android:progressTint="?attr/colorTertiary"
-                            android:secondaryProgressTint="?attr/colorTertiary"
-                            android:stepSize="0.1"
-                            tools:rating="4.2" />
+                            android:importantForAccessibility="noHideDescendants"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/product_ic_star"
+                                android:importantForAccessibility="no"
+                                app:tint="?attr/colorWarning" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="2dp"
+                                android:src="@drawable/product_ic_star"
+                                android:importantForAccessibility="no"
+                                app:tint="?attr/colorWarning" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="2dp"
+                                android:src="@drawable/product_ic_star"
+                                android:importantForAccessibility="no"
+                                app:tint="?attr/colorWarning" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="2dp"
+                                android:src="@drawable/product_ic_star"
+                                android:importantForAccessibility="no"
+                                app:tint="?attr/colorWarning" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="2dp"
+                                android:src="@drawable/product_ic_star_outline"
+                                android:importantForAccessibility="no"
+                                app:tint="?attr/colorWarning" />
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/ratingValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
                             android:importantForAccessibility="no"
-                            android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textAppearance="?attr/textAppearanceBodyLarge"
+                            android:textColor="?attr/colorOnSurface"
                             tools:text="4.2" />
                     </LinearLayout>
                 </LinearLayout>
@@ -246,30 +296,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/action_retry" />
+                android:minHeight="48dp"
+                android:text="@string/action_retry"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full" />
         </LinearLayout>
 
-        <!-- Top app bar over the image: back arrow only -->
+        <!-- Round back button floating over the image; its top margin follows the status bar (set in code) -->
         <ImageButton
             android:id="@+id/backButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="top|left"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/product_back_button_bg"
             android:contentDescription="@string/cd_back"
-            android:elevation="2dp"
             android:src="@drawable/ic_arrow_back"
             app:tint="?attr/colorOnSurface" />
     </FrameLayout>
 
-    <!-- Bottom bar -->
+    <!-- Bottom bar, pinned under the scrolling content -->
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/bottomDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:dividerColor="?attr/colorOutlineVariant"
+        tools:visibility="visible" />
+
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorSurfaceContainer"
+        android:background="?attr/colorSurface"
         android:orientation="vertical"
         android:paddingStart="16dp"
         android:paddingTop="12dp"
@@ -296,36 +355,45 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/decreaseButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/product_stepper_button_bg"
-                android:contentDescription="@string/cd_decrease_quantity"
-                android:src="@drawable/ic_remove"
-                app:tint="?attr/colorOnSurface" />
-
-            <TextView
-                android:id="@+id/quantity"
+            <!-- Pill stepper: − / quantity / + -->
+            <LinearLayout
+                android:id="@+id/stepper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:accessibilityLiveRegion="polite"
-                android:gravity="center"
-                android:minWidth="44dp"
+                android:background="@drawable/stepper_bg"
+                android:gravity="center_vertical"
+                android:minHeight="56dp"
+                android:orientation="horizontal"
                 android:paddingStart="4dp"
-                android:paddingEnd="4dp"
-                android:textAppearance="@style/TextAppearance.Basket.Money.Title"
-                android:textColor="?attr/colorOnSurface"
-                tools:text="1" />
+                android:paddingEnd="4dp">
 
-            <ImageButton
-                android:id="@+id/increaseButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/product_stepper_button_bg"
-                android:contentDescription="@string/cd_increase_quantity"
-                android:src="@drawable/ic_add"
-                app:tint="?attr/colorOnSurface" />
+                <ImageButton
+                    android:id="@+id/decreaseButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/stepper_button_bg"
+                    android:contentDescription="@string/cd_decrease_quantity"
+                    android:src="@drawable/ic_remove" />
+
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:accessibilityLiveRegion="polite"
+                    android:gravity="center"
+                    android:minWidth="28dp"
+                    android:textAppearance="@style/TextAppearance.Basket.Money.Title"
+                    android:textColor="?attr/colorOnSurface"
+                    tools:text="1" />
+
+                <ImageButton
+                    android:id="@+id/increaseButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/stepper_button_bg"
+                    android:contentDescription="@string/cd_increase_quantity"
+                    android:src="@drawable/ic_add" />
+            </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/addButton"
@@ -334,7 +402,9 @@
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
                 android:minHeight="56dp"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
                 app:iconGravity="textStart"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
                 tools:text="Add to Weekly shop · $1.74" />
         </LinearLayout>
     </LinearLayout>

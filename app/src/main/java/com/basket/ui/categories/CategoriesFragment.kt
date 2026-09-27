@@ -78,6 +78,7 @@ class CategoriesFragment : Fragment() {
         )
         binding.categoryList.layoutManager = LinearLayoutManager(requireContext())
         binding.categoryList.adapter = ConcatAdapter(categoryAdapter, footerAdapter)
+        binding.categoryList.addItemDecoration(CategoryDividerDecoration(requireContext(), categoryAdapter))
         touchHelper.attachToRecyclerView(binding.categoryList)
 
         if (viewModel.editingId != null) showNameDialog()
@@ -120,9 +121,9 @@ class CategoriesFragment : Fragment() {
         if (category.isOther) return
         val lastMovable = categoryAdapter.movableCount - 1
         PopupMenu(requireContext(), anchor).apply {
-            menu.add(Menu.NONE, MENU_RENAME, 0, R.string.action_rename)
-            menu.add(Menu.NONE, MENU_MOVE_UP, 1, R.string.move_up).isEnabled = position > 0
-            menu.add(Menu.NONE, MENU_MOVE_DOWN, 2, R.string.move_down).isEnabled = position < lastMovable
+            menu.add(Menu.NONE, MENU_MOVE_UP, 0, R.string.move_up).isEnabled = position > 0
+            menu.add(Menu.NONE, MENU_MOVE_DOWN, 1, R.string.move_down).isEnabled = position < lastMovable
+            menu.add(Menu.NONE, MENU_RENAME, 2, R.string.action_rename)
             menu.add(Menu.NONE, MENU_DELETE, 3, R.string.action_delete)
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
@@ -144,6 +145,7 @@ class CategoriesFragment : Fragment() {
         val name = category.displayName(requireContext())
         viewModel.delete(category)
         Snackbar.make(binding.root, getString(R.string.category_deleted, name), Snackbar.LENGTH_LONG)
+            .setDuration(UNDO_DURATION_MS)
             .setAction(R.string.action_undo) { viewModel.restore(category) }
             .show()
     }
@@ -232,5 +234,6 @@ class CategoriesFragment : Fragment() {
         const val MENU_MOVE_UP = 2
         const val MENU_MOVE_DOWN = 3
         const val MENU_DELETE = 4
+        const val UNDO_DURATION_MS = 5_000
     }
 }

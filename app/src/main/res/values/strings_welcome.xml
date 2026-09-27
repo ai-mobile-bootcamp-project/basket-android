@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome_title">Welcome to Basket</string>
+    <string name="welcome_tagline">Grocery lists that add up as you shop.</string>
+    <string name="welcome_point1_title">Tick as you go</string>
+    <string name="welcome_point1_body">Items sit in your store\'s aisle order and drop into the basket when you tick them.</string>
+    <string name="welcome_point2_title">Know the total first</string>
+    <string name="welcome_point2_body">Add a price and every list shows what the trip will cost.</string>
+    <string name="welcome_point3_title">Works offline</string>
+    <string name="welcome_point3_body">No account. Everything stays on this phone.</string>
+    <string name="welcome_get_started">Get started</string>
+    <string name="welcome_start_empty">Start without sample lists</string>
+</resources>

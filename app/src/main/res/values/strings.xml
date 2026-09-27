@@ -71,8 +71,6 @@
     <string name="menu_finish_shopping">Finish shopping</string>
     <string name="section_header">%1$s · %2$d</string>
     <string name="in_basket_header">In basket · %d</string>
-    <string name="totals_total">Total %1$s</string>
-    <string name="totals_in_basket">In basket %1$s</string>
     <plurals name="items_without_price">
         <item quantity="one">%d item without price</item>
         <item quantity="other">%d items without price</item>
@@ -83,14 +81,6 @@
     <string name="item_quantity_price">%1$d × %2$s</string>
     <string name="price_missing">—</string>
     <string name="item_removed">%1$s removed</string>
-    <plurals name="clear_basket_title">
-        <item quantity="one">Remove %d item in basket?</item>
-        <item quantity="other">Remove %d items in basket?</item>
-    </plurals>
-    <plurals name="clear_basket_message">
-        <item quantity="one">The %d item still to buy stays on the list.</item>
-        <item quantity="other">The %d items still to buy stay on the list.</item>
-    </plurals>
     <plurals name="finish_summary">
         <item quantity="one">%1$d of %2$d bought · %3$s spent</item>
         <item quantity="other">%1$d of %2$d bought · %3$s spent</item>
@@ -116,10 +106,10 @@
     <string name="edit_item_title">Edit item</string>
     <string name="field_name">Name</string>
     <string name="field_quantity">Quantity</string>
-    <string name="field_unit_price">Unit price</string>
+    <string name="field_unit_price">Unit price (optional)</string>
     <string name="field_category">Category</string>
-    <string name="field_note">Note</string>
-    <string name="note_hint">e.g. sliced</string>
+    <string name="field_note">Note (optional)</string>
+    <string name="note_hint">e.g. sliced, the big one</string>
     <string name="line_total">%1$d × %2$s = %3$s</string>
     <string name="add_to_list">Add to %1$s</string>
     <string name="save_changes">Save changes</string>
@@ -201,7 +191,7 @@
     <string name="language_spanish" translatable="false">Español</string>
     <string name="language_arabic" translatable="false">العربية</string>
     <string name="setting_move_ticked">Move ticked items down</string>
-    <string name="setting_move_ticked_summary">Ticked items go to In basket at the bottom of each list</string>
+    <string name="setting_move_ticked_summary">Ticked items go to In basket at the bottom</string>
     <string name="setting_categories">Categories</string>
     <string name="setting_refresh_catalog">Refresh product catalog</string>
     <string name="last_updated">Last updated %1$s</string>
@@ -211,7 +201,19 @@
     <string name="reset_title">Reset all lists?</string>
     <string name="reset_message">Your lists and categories are replaced by the sample data. This can\'t be undone.</string>
     <string name="reset_confirm">Reset</string>
-    <string name="version">Version %1$s</string>
-    <string name="data_credit">Product data: DummyJSON (dummyjson.com)</string>
     <string name="data_credit_url" translatable="false">https://dummyjson.com</string>
+
+    <!-- Design refresh -->
+    <string name="totals_total_label">Total</string>
+    <string name="totals_in_basket_label">In basket</string>
+    <plurals name="items_removed">
+        <item quantity="one">%d item removed</item>
+        <item quantity="other">%d items removed</item>
+    </plurals>
+    <string name="category_no_items">No items</string>
+    <string name="setting_categories_summary">Aisle order for every list</string>
+    <string name="setting_reset_summary">Replaces lists and categories</string>
+    <string name="setting_version">Version</string>
+    <string name="setting_product_data">Product data</string>
+    <string name="setting_product_data_summary">DummyJSON (dummyjson.com)</string>
 </resources>

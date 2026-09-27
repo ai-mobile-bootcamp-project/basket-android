@@ -3,7 +3,6 @@ package com.basket.data.seed
 import android.content.Context
 import androidx.room.withTransaction
 import com.basket.data.AppClock
-import com.basket.data.SettingsRepository
 import com.basket.data.db.BasketDatabase
 import com.basket.data.db.CategoryEntity
 import com.basket.data.db.ItemEntity
@@ -42,27 +41,23 @@ class SeedImporter @Inject constructor(
     @ApplicationContext private val context: Context,
     private val db: BasketDatabase,
     private val json: Json,
-    private val settings: SettingsRepository,
     private val clock: AppClock,
 ) {
-    /** Imports the sample data on the very first launch. */
-    suspend fun importOnFirstLaunch() {
-        if (settings.isSampleDataImported()) return
-        importSampleData()
-        settings.markSampleDataImported()
+    /** Makes sure the default aisles exist; they are needed even when the user starts without sample lists. */
+    suspend fun ensureDefaultCategories() = withContext(Dispatchers.IO) {
+        if (db.categoryDao().getAll().isNotEmpty()) return@withContext
+        db.withTransaction { insertCategories(readSeed()) }
     }
 
-    /** Replaces all lists and categories with the sample data (Settings → Reset sample data). */
+    /** Replaces all lists and categories with the sample data (Welcome → Get started, Settings → Reset sample data). */
     suspend fun importSampleData() = withContext(Dispatchers.IO) {
-        val seed = json.decodeFromString<SeedFile>(context.assets.open("sample-data.json").bufferedReader().use { it.readText() })
+        val seed = readSeed()
         db.withTransaction {
             db.itemDao().deleteAll()
             db.listDao().deleteAll()
             db.categoryDao().deleteAll()
 
-            val categoryIds = seed.categories.mapIndexed { index, key ->
-                key to db.categoryDao().insert(CategoryEntity(key = key, name = null, position = index))
-            }.toMap()
+            val categoryIds = insertCategories(seed)
 
             // The first list in the file is the most recently changed one.
             val now = clock.now()
@@ -85,4 +80,13 @@ class SeedImporter @Inject constructor(
             }
         }
     }
+
+    private fun readSeed(): SeedFile =
+        json.decodeFromString(context.assets.open("sample-data.json").bufferedReader().use { it.readText() })
+
+    /** Inserts the default aisles in their default order; returns category key → id. */
+    private suspend fun insertCategories(seed: SeedFile): Map<String, Long> =
+        seed.categories.mapIndexed { index, key ->
+            key to db.categoryDao().insert(CategoryEntity(key = key, name = null, position = index))
+        }.toMap()
 }

@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
@@ -92,14 +94,16 @@ private fun SkeletonCard(modifier: Modifier = Modifier) {
                     .aspectRatio(1f)
                     .background(MaterialTheme.colorScheme.surfaceContainerHigh),
             )
-            Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Box(Modifier.fillMaxWidth(0.8f).height(14.dp).background(block, MaterialTheme.shapes.extraSmall))
-                Box(Modifier.fillMaxWidth(0.5f).height(14.dp).background(block, MaterialTheme.shapes.extraSmall))
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(Modifier.fillMaxWidth(0.4f).height(22.dp).background(block, MaterialTheme.shapes.extraSmall))
-                    Spacer(Modifier.weight(1f))
-                    Box(Modifier.size(40.dp).background(block, MaterialTheme.shapes.extraLarge))
+            Row(
+                modifier = Modifier.padding(start = 12.dp, end = 8.dp, top = 12.dp, bottom = 12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Box(Modifier.fillMaxWidth(0.7f).height(14.dp).background(block, MaterialTheme.shapes.extraSmall))
+                    Box(Modifier.fillMaxWidth(0.5f).height(20.dp).background(block, MaterialTheme.shapes.extraSmall))
                 }
+                Spacer(Modifier.width(8.dp))
+                Box(Modifier.size(48.dp).background(block, CircleShape))
             }
         }
     }

@@ -87,6 +87,15 @@ class ListsRepository @Inject constructor(
         listDao.touch(item.listId, clock.now())
     }
 
+    /** Puts several removed items of one list back at once (e.g. Undo after Finish shopping). */
+    suspend fun restoreItems(items: List<ListItem>) {
+        if (items.isEmpty()) return
+        db.withTransaction {
+            itemDao.insertAll(items.map { it.toEntity() })
+            listDao.touch(items.first().listId, clock.now())
+        }
+    }
+
     suspend fun deleteItem(item: ListItem) = db.withTransaction {
         itemDao.delete(item.id)
         listDao.touch(item.listId, clock.now())

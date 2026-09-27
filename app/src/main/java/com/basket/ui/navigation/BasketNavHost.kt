@@ -1,12 +1,14 @@
 package com.basket.ui.navigation
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +25,7 @@ import com.basket.ui.item.ItemFormFragment
 import com.basket.ui.lists.ListsRoute
 import com.basket.ui.product.ProductDetailFragment
 import com.basket.ui.settings.SettingsFragment
+import com.basket.ui.welcome.WelcomeRoute
 
 /**
  * Roles the design handover does not define (background, surfaceContainer, surfaceVariant, inverse colours) would
@@ -53,57 +56,78 @@ private fun WithDerivedRoles(content: @Composable () -> Unit) {
 }
 
 @Composable
-fun BasketNavHost(nav: NavHostController) = WithDerivedRoles {
-    Scaffold(contentWindowInsets = WindowInsets.safeDrawing) { innerPadding ->
+fun BasketNavHost(nav: NavHostController, startDestination: Any) = WithDerivedRoles {
+    // Each destination keeps clear of the system bars and the keyboard, except Product detail, whose image runs
+    // under the status bar (the fragment offsets its back button itself).
+    val safe = Modifier
+        .fillMaxSize()
+        .windowInsetsPadding(WindowInsets.safeDrawing)
+    Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
         NavHost(
             navController = nav,
-            startDestination = ListsDestination,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .consumeWindowInsets(innerPadding),
+            startDestination = startDestination,
+            modifier = Modifier.fillMaxSize(),
         ) {
+            composable<WelcomeDestination> {
+                Box(safe) {
+                    WelcomeRoute(
+                        onDone = {
+                            nav.navigate(ListsDestination) {
+                                popUpTo<WelcomeDestination> { inclusive = true }
+                            }
+                        },
+                    )
+                }
+            }
             composable<ListsDestination> {
-                ListsRoute(
-                    onOpenList = { id -> nav.navigate(ListDetailDestination(id)) },
-                    onOpenSettings = { nav.navigate(SettingsDestination) },
-                )
+                Box(safe) {
+                    ListsRoute(
+                        onOpenList = { id -> nav.navigate(ListDetailDestination(id)) },
+                        onOpenSettings = { nav.navigate(SettingsDestination) },
+                    )
+                }
             }
             composable<ListDetailDestination> { entry ->
                 val route = entry.toRoute<ListDetailDestination>()
-                ListDetailRoute(
-                    onBack = { nav.popBackStack() },
-                    onAddItem = { nav.navigate(ItemFormDestination(route.listId)) },
-                    onEditItem = { itemId -> nav.navigate(ItemFormDestination(route.listId, itemId)) },
-                    onBrowse = { nav.navigate(BrowseDestination(route.listId)) },
-                )
+                Box(safe) {
+                    ListDetailRoute(
+                        onBack = { nav.popBackStack() },
+                        onAddItem = { nav.navigate(ItemFormDestination(route.listId)) },
+                        onEditItem = { itemId -> nav.navigate(ItemFormDestination(route.listId, itemId)) },
+                        onBrowse = { nav.navigate(BrowseDestination(route.listId)) },
+                    )
+                }
             }
             composable<ItemFormDestination> { entry ->
                 val route = entry.toRoute<ItemFormDestination>()
                 AndroidFragment<ItemFormFragment>(
-                    Modifier.fillMaxSize(),
+                    safe,
                     arguments = ItemFormFragment.args(route.listId, route.itemId),
                 )
             }
             composable<BrowseDestination> { entry ->
                 val route = entry.toRoute<BrowseDestination>()
-                BrowseRoute(
-                    onBack = { nav.popBackStack() },
-                    onOpenProduct = { productId -> nav.navigate(ProductDetailDestination(route.listId, productId)) },
-                )
+                Box(safe) {
+                    BrowseRoute(
+                        onBack = { nav.popBackStack() },
+                        onOpenProduct = { productId -> nav.navigate(ProductDetailDestination(route.listId, productId)) },
+                    )
+                }
             }
             composable<ProductDetailDestination> { entry ->
                 val route = entry.toRoute<ProductDetailDestination>()
                 AndroidFragment<ProductDetailFragment>(
-                    Modifier.fillMaxSize(),
+                    Modifier
+                        .fillMaxSize()
+                        .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom)),
                     arguments = ProductDetailFragment.args(route.listId, route.productId),
                 )
             }
             composable<SettingsDestination> {
-                AndroidFragment<SettingsFragment>(Modifier.fillMaxSize())
+                AndroidFragment<SettingsFragment>(safe)
             }
             composable<CategoriesDestination> {
-                AndroidFragment<CategoriesFragment>(Modifier.fillMaxSize())
+                AndroidFragment<CategoriesFragment>(safe)
             }
         }
     }

@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Delete
-import androidx.compose.material.icons.rounded.Storefront
+import androidx.compose.material.icons.outlined.Storefront
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -67,7 +67,7 @@ fun ItemRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(56.dp)
+            .height(64.dp)
             .background(Color.White)
             .clickable(onClickLabel = editLabel, onClick = onClick)
             .semantics {
@@ -92,7 +92,7 @@ fun ItemRow(
                 .alpha(emphasis)
                 .clearAndSetSemantics { },
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
                     item.name,
                     style = MaterialTheme.typography.bodyLarge,
@@ -104,9 +104,9 @@ fun ItemRow(
                 )
                 if (item.catalogProductId != null) {
                     Icon(
-                        Icons.Rounded.Storefront,
+                        Icons.Outlined.Storefront,
                         contentDescription = stringResource(R.string.cd_from_catalog),
-                        tint = MaterialTheme.colorScheme.secondary,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(16.dp),
                     )
                 }

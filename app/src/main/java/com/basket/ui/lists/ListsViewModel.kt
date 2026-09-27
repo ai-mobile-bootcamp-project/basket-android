@@ -55,7 +55,7 @@ class ListsViewModel @Inject constructor(
 
     private val _openList = Channel<Long>(Channel.BUFFERED)
 
-    /** The id of a list that was just created and should open. */
+    /** The id of a list that was just created; the screen opens it. */
     val openList: Flow<Long> = _openList.receiveAsFlow()
 
     private var creating = false

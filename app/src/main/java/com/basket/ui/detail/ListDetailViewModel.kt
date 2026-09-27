@@ -123,9 +123,16 @@ class ListDetailViewModel @Inject constructor(
         viewModelScope.launch { listsRepository.clearItems(listId) }
     }
 
-    /** Finish shopping → "Keep the rest on this list": the bought items go. */
-    fun keepRest() {
-        viewModelScope.launch { listsRepository.removeTicked(listId) }
+    /** Finish shopping → "Keep the rest on this list": the bought items go at once, with Undo. */
+    fun keepRest(message: (Int) -> String) {
+        viewModelScope.launch {
+            val bought = listsRepository.getItems(listId).filter { it.ticked }
+            if (bought.isEmpty()) return@launch
+            listsRepository.removeTicked(listId)
+            messageCenter.post(
+                UserMessage(message(bought.size)) { listsRepository.restoreItems(bought) },
+            )
+        }
     }
 
     fun share(labels: ShareLabels, money: (Long) -> String) {

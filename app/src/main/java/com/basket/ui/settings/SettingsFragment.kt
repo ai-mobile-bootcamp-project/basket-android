@@ -55,6 +55,8 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbar.setNavigationOnClickListener { navigator.navigateBack() }
+        listOf(binding.appearanceHeader, binding.listsHeader, binding.dataHeader, binding.aboutHeader)
+            .forEach { ViewCompat.setAccessibilityHeading(it, true) }
 
         binding.themeValue.text = getString(themeLabel(viewModel.themeMode))
         binding.themeRow.setOnClickListener { showThemeDialog() }
@@ -80,7 +82,8 @@ class SettingsFragment : Fragment() {
         binding.refreshRow.setOnClickListener { viewModel.refreshCatalog() }
         binding.resetRow.setOnClickListener { showResetDialog() }
 
-        binding.versionText.text = getString(R.string.version, BuildConfig.VERSION_NAME)
+        binding.versionValue.text = BuildConfig.VERSION_NAME
+        ViewCompat.setScreenReaderFocusable(binding.versionRow, true)
         binding.dataCreditRow.setOnClickListener { openDataSource() }
 
         when (savedInstanceState?.getString(KEY_OPEN_DIALOG)) {
@@ -121,6 +124,7 @@ class SettingsFragment : Fragment() {
         binding.refreshRow.isEnabled = !refreshing
         binding.refreshProgress.isVisible = refreshing
         val alpha = if (refreshing) DISABLED_ALPHA else 1f
+        binding.refreshIcon.alpha = alpha
         binding.refreshTitle.alpha = alpha
         binding.lastUpdated.alpha = alpha
     }

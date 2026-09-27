@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome_title">Bienvenido a Basket</string>
+    <string name="welcome_tagline">Listas de la compra que suman mientras compras.</string>
+    <string name="welcome_point1_title">Marca sobre la marcha</string>
+    <string name="welcome_point1_body">Los artículos siguen el orden de pasillos de tu tienda y pasan a la cesta al marcarlos.</string>
+    <string name="welcome_point2_title">Conoce el total antes</string>
+    <string name="welcome_point2_body">Añade un precio y cada lista muestra lo que costará la compra.</string>
+    <string name="welcome_point3_title">Funciona sin conexión</string>
+    <string name="welcome_point3_body">Sin cuenta. Todo se queda en este teléfono.</string>
+    <string name="welcome_get_started">Empezar</string>
+    <string name="welcome_start_empty">Empezar sin listas de ejemplo</string>
+</resources>

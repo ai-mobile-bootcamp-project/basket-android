@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -30,13 +31,14 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
@@ -44,10 +46,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
@@ -64,6 +68,7 @@ import com.basket.domain.CategoryKey
 import com.basket.domain.Dates
 import com.basket.domain.ListItem
 import com.basket.ui.common.appLocale
+import com.basket.ui.common.emoji
 import com.basket.ui.common.labelRes
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
@@ -148,6 +153,7 @@ fun BrowseScreen(
     val gridState = rememberLazyGridState()
     Scaffold(
         modifier = modifier,
+        containerColor = MaterialTheme.colorScheme.surface,
         topBar = { BrowseTopBar(listName = state.listName, onBack = onBack) },
         snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { innerPadding ->
@@ -214,12 +220,13 @@ private fun BrowseTopBar(listName: String, onBack: () -> Unit) {
 @Composable
 private fun SearchField(query: String, onQueryChange: (String) -> Unit) {
     val focusManager = LocalFocusManager.current
-    OutlinedTextField(
+    val fieldColor = MaterialTheme.colorScheme.surfaceContainerHigh
+    TextField(
         value = query,
         onValueChange = onQueryChange,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 4.dp),
         placeholder = { Text(stringResource(R.string.search_hint)) },
         leadingIcon = { Icon(Icons.Rounded.Search, contentDescription = null) },
         trailingIcon = if (query.isNotEmpty()) {
@@ -232,7 +239,15 @@ private fun SearchField(query: String, onQueryChange: (String) -> Unit) {
             null
         },
         singleLine = true,
-        shape = MaterialTheme.shapes.extraLarge,
+        shape = CircleShape,
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = fieldColor,
+            unfocusedContainerColor = fieldColor,
+            disabledContainerColor = fieldColor,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent,
+        ),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
     )
@@ -257,6 +272,7 @@ private fun CategoryChips(selected: CategoryKey?, onSelect: (CategoryKey?) -> Un
         items(chipCategories, key = { it.name }) { key ->
             CategoryChip(
                 label = stringResource(key.labelRes),
+                emoji = key.emoji,
                 selected = selected == key,
                 onClick = { onSelect(key) },
             )
@@ -265,15 +281,19 @@ private fun CategoryChips(selected: CategoryKey?, onSelect: (CategoryKey?) -> Un
 }
 
 @Composable
-private fun CategoryChip(label: String, selected: Boolean, onClick: () -> Unit) {
+private fun CategoryChip(label: String, selected: Boolean, onClick: () -> Unit, emoji: String? = null) {
     FilterChip(
         selected = selected,
         onClick = onClick,
         label = { Text(label) },
-        leadingIcon = if (selected) {
-            { Icon(Icons.Rounded.Check, contentDescription = null, modifier = Modifier.size(FilterChipDefaults.IconSize)) }
-        } else {
-            null
+        leadingIcon = when {
+            selected -> {
+                { Icon(Icons.Rounded.Check, contentDescription = null, modifier = Modifier.size(FilterChipDefaults.IconSize)) }
+            }
+            emoji != null -> {
+                { Text(text = emoji, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.clearAndSetSemantics {}) }
+            }
+            else -> null
         },
         colors = FilterChipDefaults.filterChipColors(
             selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -340,14 +360,14 @@ private fun ProductGrid(
         columns = GridCells.Fixed(2),
         state = gridState,
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item(key = "count", span = { GridItemSpan(maxLineSpan) }, contentType = "count") {
             Text(
                 text = "${products.size} products",
-                style = MaterialTheme.typography.labelLarge,
+                style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite },
             )

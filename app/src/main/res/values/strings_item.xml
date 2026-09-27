@@ -2,4 +2,5 @@
 <!-- Extra strings for 3 Add / edit item and 5 Product detail. -->
 <resources>
     <string name="quantity_a11y">Quantity %d</string>
+    <string name="price_was">Was %1$s</string>
 </resources>

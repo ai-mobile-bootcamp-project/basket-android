@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome_title">مرحبًا بك في Basket</string>
+    <string name="welcome_tagline">قوائم تسوّق تحسب المجموع أثناء التسوّق.</string>
+    <string name="welcome_point1_title">علّم أثناء التسوّق</string>
+    <string name="welcome_point1_body">تُرتَّب العناصر حسب ممرات متجرك وتنتقل إلى السلة عند تعليمها.</string>
+    <string name="welcome_point2_title">اعرف المجموع أولًا</string>
+    <string name="welcome_point2_body">أضف سعرًا وستعرض كل قائمة تكلفة الرحلة.</string>
+    <string name="welcome_point3_title">يعمل دون اتصال</string>
+    <string name="welcome_point3_body">بلا حساب. كل شيء يبقى على هذا الهاتف.</string>
+    <string name="welcome_get_started">ابدأ</string>
+    <string name="welcome_start_empty">ابدأ بدون قوائم نموذجية</string>
+</resources>

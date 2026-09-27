@@ -1,6 +1,7 @@
 package com.basket.ui.detail
 
 import android.content.res.Resources
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,11 +15,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.outlined.Storefront
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.ExpandLess
@@ -26,14 +28,15 @@ import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material.icons.rounded.ShoppingBasket
-import androidx.compose.material.icons.rounded.Storefront
 import androidx.compose.material.icons.rounded.TaskAlt
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -42,7 +45,6 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -60,8 +62,10 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -78,6 +82,7 @@ import com.basket.domain.Section
 import com.basket.domain.ShoppingGroups
 import com.basket.domain.Sorting
 import com.basket.ui.common.displayName
+import com.basket.ui.common.emoji
 import com.basket.ui.common.formatMoney
 import com.basket.ui.common.label
 import com.basket.ui.lists.ListNameDialog
@@ -88,6 +93,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 private const val UNDO_TIMEOUT_MS = 5_000L
+private val FOOTER_BUTTON_HEIGHT = 56.dp
 
 @Composable
 fun ListDetailRoute(onBack: () -> Unit, onAddItem: () -> Unit, onEditItem: (Long) -> Unit, onBrowse: () -> Unit) {
@@ -139,7 +145,9 @@ fun ListDetailRoute(onBack: () -> Unit, onAddItem: () -> Unit, onEditItem: (Long
         onShare = { viewModel.share(ResourceShareLabels(context.resources)) { cents -> context.formatMoney(cents) } },
         onRename = viewModel::rename,
         onClearBasket = viewModel::clearBasket,
-        onKeepRest = viewModel::keepRest,
+        onKeepRest = {
+            viewModel.keepRest { count -> context.resources.getQuantityString(R.plurals.items_removed, count, count) }
+        },
     )
 }
 
@@ -209,24 +217,21 @@ fun ListDetailScreen(
                         onFinish = { showFinish = true },
                     )
                 },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+                ),
                 scrollBehavior = scrollBehavior,
             )
         },
+        containerColor = MaterialTheme.colorScheme.surface,
         bottomBar = {
             if (showContent) {
                 TotalsFooter(
                     totals = state.totals,
                     onBrowse = onBrowse,
+                    onAddItem = onAddItem,
                     onFinish = { showFinish = true },
-                )
-            }
-        },
-        floatingActionButton = {
-            if (showContent) {
-                ExtendedFloatingActionButton(
-                    onClick = onAddItem,
-                    icon = { Icon(Icons.Rounded.Add, contentDescription = null) },
-                    text = { Text(stringResource(R.string.add_item)) },
                 )
             }
         },
@@ -249,12 +254,13 @@ fun ListDetailScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),
-                contentPadding = PaddingValues(bottom = 88.dp),
+                contentPadding = PaddingValues(bottom = 8.dp),
             ) {
                 itemsIndexed(rows, key = { _, row -> row.key }, contentType = { _, row -> row.contentType }) { index, row ->
                     when (row) {
                         is DetailRow.SectionHeader -> SectionHeader(
                             title = stringResource(R.string.section_header, row.category.label(), row.count),
+                            emoji = row.category.emoji,
                             modifier = Modifier.animateItem(),
                         )
                         is DetailRow.BasketHeader -> InBasketHeader(
@@ -401,16 +407,29 @@ private fun DetailOverflowMenu(
 }
 
 @Composable
-private fun SectionHeader(title: String, modifier: Modifier = Modifier) {
-    Text(
-        title,
-        style = MaterialTheme.typography.titleSmall,
-        color = MaterialTheme.colorScheme.secondary,
+private fun SectionHeader(title: String, emoji: String?, modifier: Modifier = Modifier) {
+    Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, top = 20.dp, end = 16.dp, bottom = 4.dp)
-            .semantics { heading() },
-    )
+            .heightIn(min = 36.dp)
+            .semantics(mergeDescendants = true) { heading() }
+            .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        if (emoji != null) {
+            Text(
+                emoji,
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.clearAndSetSemantics { },
+            )
+        }
+        Text(
+            title,
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.secondary,
+        )
+    }
 }
 
 @Composable
@@ -451,61 +470,112 @@ private fun InBasketHeader(count: Int, expanded: Boolean, onToggle: () -> Unit, 
 private fun TotalsFooter(
     totals: ListTotals,
     onBrowse: () -> Unit,
+    onAddItem: () -> Unit,
     onFinish: () -> Unit,
 ) {
-    Surface(
-        color = MaterialTheme.colorScheme.surfaceContainerHigh,
-        contentColor = MaterialTheme.colorScheme.onSurface,
-        shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surface),
     ) {
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, top = 12.dp, end = 16.dp, bottom = 12.dp),
         ) {
-            Text(
-                stringResource(R.string.totals_total, formatMoney(totals.totalCents)),
-                style = BasketMoneyStyles.Display,
+            TotalLine(
+                label = stringResource(R.string.totals_total_label),
+                value = formatMoney(totals.totalCents),
+                valueStyle = BasketMoneyStyles.Display,
             )
-            Text(
-                stringResource(R.string.totals_in_basket, formatMoney(totals.inBasketCents)),
-                style = BasketMoneyStyles.Small,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            TotalLine(
+                label = stringResource(R.string.totals_in_basket_label),
+                value = formatMoney(totals.inBasketCents),
+                valueStyle = BasketMoneyStyles.Body,
             )
             if (totals.withoutPriceCount > 0) {
                 Text(
                     pluralStringResource(R.plurals.items_without_price, totals.withoutPriceCount, totals.withoutPriceCount),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 4.dp),
                 )
+            }
+            if (totals.isDone) {
+                Button(
+                    onClick = onFinish,
+                    shape = CircleShape,
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .fillMaxWidth()
+                        .heightIn(min = FOOTER_BUTTON_HEIGHT),
+                ) {
+                    Icon(Icons.Rounded.TaskAlt, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.size(8.dp))
+                    Text(stringResource(R.string.menu_finish_shopping), textAlign = TextAlign.Center)
+                }
             }
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    .padding(top = if (totals.isDone) 12.dp else 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 FilledTonalButton(
                     onClick = onBrowse,
-                    modifier = Modifier.heightIn(min = 48.dp),
+                    shape = CircleShape,
+                    colors = browseButtonColors(),
+                    modifier = Modifier
+                        .weight(1f)
+                        .heightIn(min = FOOTER_BUTTON_HEIGHT),
                 ) {
-                    Icon(Icons.Rounded.Storefront, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Icon(Icons.Outlined.Storefront, contentDescription = null, modifier = Modifier.size(18.dp))
                     Spacer(Modifier.size(8.dp))
-                    Text(stringResource(R.string.browse_products), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(stringResource(R.string.browse_products), textAlign = TextAlign.Center)
                 }
-                if (totals.isDone) {
-                    Button(
-                        onClick = onFinish,
-                        modifier = Modifier.heightIn(min = 48.dp),
-                    ) {
-                        Icon(Icons.Rounded.TaskAlt, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Spacer(Modifier.size(8.dp))
-                        Text(stringResource(R.string.menu_finish_shopping), maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    }
+                val addItemColors = if (totals.isDone) {
+                    MaterialTheme.colorScheme.primaryContainer to MaterialTheme.colorScheme.onPrimaryContainer
+                } else {
+                    MaterialTheme.colorScheme.primary to MaterialTheme.colorScheme.onPrimary
                 }
+                ExtendedFloatingActionButton(
+                    onClick = onAddItem,
+                    icon = { Icon(Icons.Rounded.Add, contentDescription = null) },
+                    text = { Text(stringResource(R.string.add_item), textAlign = TextAlign.Center) },
+                    containerColor = addItemColors.first,
+                    contentColor = addItemColors.second,
+                )
             }
         }
+    }
+}
+
+/** "Total … $45.84": the label at the start, the amount at the end, on one baseline. */
+@Composable
+private fun TotalLine(label: String, value: String, valueStyle: TextStyle) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .semantics(mergeDescendants = true) {},
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        Text(
+            label,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier
+                .weight(1f)
+                .alignByBaseline(),
+        )
+        Text(
+            value,
+            style = valueStyle,
+            color = MaterialTheme.colorScheme.onSurface,
+            textAlign = TextAlign.End,
+            modifier = Modifier.alignByBaseline(),
+        )
     }
 }
 
@@ -535,10 +605,17 @@ private fun EmptyListState(onAddItem: () -> Unit, onBrowse: () -> Unit, modifier
             Text(stringResource(R.string.add_item))
         }
         Spacer(Modifier.height(12.dp))
-        FilledTonalButton(onClick = onBrowse, modifier = Modifier.heightIn(min = 48.dp)) {
-            Icon(Icons.Rounded.Storefront, contentDescription = null, modifier = Modifier.size(18.dp))
+        FilledTonalButton(onClick = onBrowse, colors = browseButtonColors(), modifier = Modifier.heightIn(min = 48.dp)) {
+            Icon(Icons.Outlined.Storefront, contentDescription = null, modifier = Modifier.size(18.dp))
             Spacer(Modifier.size(8.dp))
             Text(stringResource(R.string.browse_products))
         }
     }
 }
+
+/** Browse products is a tonal button in primaryContainer (design tokens: "Browse products tonal button"). */
+@Composable
+private fun browseButtonColors() = ButtonDefaults.filledTonalButtonColors(
+    containerColor = MaterialTheme.colorScheme.primaryContainer,
+    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+)
