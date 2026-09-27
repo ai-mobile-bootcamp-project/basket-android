@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 4 Browse products -->
+    <string name="browse_loading">Loading products</string>
+    <string name="browse_empty_category">No groceries in %1$s</string>
+    <string name="browse_show_all">Show all products</string>
+</resources>

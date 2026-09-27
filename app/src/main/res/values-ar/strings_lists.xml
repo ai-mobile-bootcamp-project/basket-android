@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Character counter under the list name field: "12/40" -->
+    <string name="list_name_counter">%1$s/%2$s</string>
+    <!-- Item row: quantity of an item without a price, "× 2" -->
+    <string name="item_quantity_only">× %1$d</string>
+</resources>

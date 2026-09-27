@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Basket</string>
+
+    <!-- Common actions -->
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_create">Crear</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_remove">Quitar</string>
+    <string name="action_rename">Cambiar nombre</string>
+    <string name="action_duplicate">Duplicar</string>
+    <string name="action_undo">Deshacer</string>
+    <string name="action_retry">Reintentar</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_more">Más</string>
+    <string name="action_less">Menos</string>
+
+    <!-- Spoken labels for icon-only buttons -->
+    <string name="cd_back">Atrás</string>
+    <string name="cd_close">Cerrar</string>
+    <string name="cd_settings">Ajustes</string>
+    <string name="cd_more_options">Más opciones</string>
+    <string name="cd_share_list">Compartir lista</string>
+    <string name="cd_add_product">Añadir %1$s a la lista</string>
+    <string name="cd_increase_quantity">Aumentar cantidad</string>
+    <string name="cd_decrease_quantity">Reducir cantidad</string>
+    <string name="cd_delete_item">Eliminar artículo</string>
+    <string name="cd_reorder_category">Reordenar %1$s</string>
+    <string name="cd_from_catalog">Del catálogo</string>
+    <string name="cd_clear_search">Borrar búsqueda</string>
+    <string name="cd_locked_category">Siempre al final</string>
+    <string name="cd_expand">Desplegar</string>
+    <string name="cd_collapse">Contraer</string>
+
+    <!-- Categories (default names) -->
+    <string name="category_fruit_veg">Fruta y verdura</string>
+    <string name="category_bakery">Panadería</string>
+    <string name="category_dairy_eggs">Lácteos y huevos</string>
+    <string name="category_meat_fish">Carne y pescado</string>
+    <string name="category_pantry">Despensa</string>
+    <string name="category_frozen">Congelados</string>
+    <string name="category_drinks">Bebidas</string>
+    <string name="category_household_pets">Hogar y mascotas</string>
+    <string name="category_other">Otros</string>
+
+    <!-- 1 Lists -->
+    <string name="new_list">Nueva lista</string>
+    <string name="new_list_hint">p. ej., Compra semanal</string>
+    <string name="list_name_label">Nombre de la lista</string>
+    <string name="rename_list">Cambiar nombre de la lista</string>
+    <string name="list_copy_name">%1$s (copia)</string>
+    <string name="lists_empty_title">Aún no hay listas</string>
+    <string name="lists_empty_action">Crea tu primera lista</string>
+    <string name="list_card_no_items">Aún no hay artículos</string>
+    <plurals name="list_card_progress">
+        <item quantity="one">%1$d de %2$d en la cesta</item>
+        <item quantity="many">%1$d de %2$d en la cesta</item>
+        <item quantity="other">%1$d de %2$d en la cesta</item>
+    </plurals>
+    <plurals name="list_card_without_price">
+        <item quantity="one">+ %d sin precio</item>
+        <item quantity="many">+ %d sin precio</item>
+        <item quantity="other">+ %d sin precio</item>
+    </plurals>
+    <string name="without_price">artículos sin precio</string>
+    <string name="list_card_done">Hecho</string>
+    <string name="list_deleted">%1$s eliminada</string>
+
+    <!-- 2 List detail -->
+    <string name="action_share">Compartir</string>
+    <string name="menu_clear_basket">Vaciar la cesta</string>
+    <string name="menu_finish_shopping">Terminar la compra</string>
+    <string name="section_header">%1$s · %2$d</string>
+    <string name="in_basket_header">En la cesta · %d</string>
+    <string name="totals_total">Total %1$s</string>
+    <string name="totals_in_basket">En la cesta %1$s</string>
+    <plurals name="items_without_price">
+        <item quantity="one">%d artículo sin precio</item>
+        <item quantity="many">%d artículos sin precio</item>
+        <item quantity="other">%d artículos sin precio</item>
+    </plurals>
+    <string name="add_item">Añadir artículo</string>
+    <string name="browse_products">Ver productos</string>
+    <string name="list_empty">Esta lista aún está vacía</string>
+    <string name="item_quantity_price">%1$d × %2$s</string>
+    <string name="price_missing">—</string>
+    <string name="item_removed">%1$s quitado</string>
+    <plurals name="clear_basket_title">
+        <item quantity="one">¿Quitar %d artículo de la cesta?</item>
+        <item quantity="many">¿Quitar %d artículos de la cesta?</item>
+        <item quantity="other">¿Quitar %d artículos de la cesta?</item>
+    </plurals>
+    <plurals name="clear_basket_message">
+        <item quantity="one">El %d artículo que falta por comprar se queda en la lista.</item>
+        <item quantity="many">Los %d artículos que faltan por comprar se quedan en la lista.</item>
+        <item quantity="other">Los %d artículos que faltan por comprar se quedan en la lista.</item>
+    </plurals>
+    <plurals name="finish_summary">
+        <item quantity="one">%1$d de %2$d comprado · %3$s gastados</item>
+        <item quantity="many">%1$d de %2$d comprados · %3$s gastados</item>
+        <item quantity="other">%1$d de %2$d comprados · %3$s gastados</item>
+    </plurals>
+    <string name="finish_not_bought">Sin comprar: %1$s</string>
+    <string name="finish_keep_rest">Dejar el resto en esta lista</string>
+    <string name="finish_keep_all">Dejar la lista como está</string>
+    <string name="item_a11y_not_in_basket">%1$s, %2$d a %3$s, %4$s, no está en la cesta</string>
+    <string name="item_a11y_in_basket">%1$s, %2$d a %3$s, %4$s, en la cesta</string>
+    <string name="item_a11y_no_price_not_in_basket">%1$s, %2$d, sin precio, no está en la cesta</string>
+    <string name="item_a11y_no_price_in_basket">%1$s, %2$d, sin precio, en la cesta</string>
+    <string name="share_chooser_title">Compartir lista</string>
+    <string name="share_to_buy">Por comprar (%d)</string>
+    <string name="share_in_basket">En la cesta (%d)</string>
+    <string name="share_total">Total %1$s</string>
+    <plurals name="share_total_without_price">
+        <item quantity="one">Total %2$s (%1$d artículo sin precio)</item>
+        <item quantity="many">Total %2$s (%1$d artículos sin precio)</item>
+        <item quantity="other">Total %2$s (%1$d artículos sin precio)</item>
+    </plurals>
+
+    <!-- 3 Add / edit item -->
+    <string name="add_item_title">Añadir artículo</string>
+    <string name="edit_item_title">Editar artículo</string>
+    <string name="field_name">Nombre</string>
+    <string name="field_quantity">Cantidad</string>
+    <string name="field_unit_price">Precio por unidad</string>
+    <string name="field_category">Categoría</string>
+    <string name="field_note">Nota</string>
+    <string name="note_hint">p. ej., en rodajas</string>
+    <string name="line_total">%1$d × %2$s = %3$s</string>
+    <string name="add_to_list">Añadir a %1$s</string>
+    <string name="save_changes">Guardar cambios</string>
+    <string name="error_name">Escribe un nombre</string>
+    <string name="error_price">Escribe un precio entre %1$s y %2$s</string>
+    <string name="duplicate_title">%1$s ya está en esta lista</string>
+    <plurals name="duplicate_add_more">
+        <item quantity="one">Añadir %d más</item>
+        <item quantity="many">Añadir %d más</item>
+        <item quantity="other">Añadir %d más</item>
+    </plurals>
+    <string name="discard_title">¿Descartar los cambios?</string>
+    <string name="keep_editing">Seguir editando</string>
+    <string name="discard">Descartar</string>
+    <string name="item_added">%1$s añadido</string>
+    <string name="changes_saved">Cambios guardados</string>
+
+    <!-- 4 Browse products -->
+    <string name="browse_title">Ver productos</string>
+    <string name="browse_subtitle">Añadiendo a %1$s</string>
+    <string name="search_hint">Buscar productos</string>
+    <string name="chip_all">Todo</string>
+    <plurals name="product_count">
+        <item quantity="one">%d producto</item>
+        <item quantity="many">%d productos</item>
+        <item quantity="other">%d productos</item>
+    </plurals>
+    <string name="discount_badge">−%d %%</string>
+    <string name="stock_in">Disponible</string>
+    <string name="stock_low">Quedan pocos</string>
+    <string name="stock_out">Agotado</string>
+    <string name="offline_banner">Sin conexión · productos guardados el %1$s</string>
+    <string name="error_load_title">No se pueden cargar los productos</string>
+    <string name="error_offline_message">Comprueba la conexión y vuelve a intentarlo.</string>
+    <string name="error_server_message">Algo ha fallado por nuestra parte.</string>
+    <string name="no_results">Ningún producto coincide con «%1$s»</string>
+    <string name="clear_search">Borrar búsqueda</string>
+    <string name="product_added">%1$s añadido a %2$s</string>
+    <string name="product_updated">%1$s actualizado</string>
+
+    <!-- 5 Product detail -->
+    <string name="save_percent">Ahorra un %d %%</string>
+    <string name="on_your_list">En tu lista: %d</string>
+    <string name="add_to_list_price">Añadir a %1$s · %2$s</string>
+    <string name="update_list">Actualizar lista</string>
+    <string name="rating_label">Valoración: %1$s de 5</string>
+
+    <!-- 6 Categories -->
+    <string name="categories_title">Categorías</string>
+    <string name="categories_subtitle">Arrastra para seguir el orden de los pasillos de tu tienda</string>
+    <plurals name="category_item_count">
+        <item quantity="one">%d artículo</item>
+        <item quantity="many">%d artículos</item>
+        <item quantity="other">%d artículos</item>
+    </plurals>
+    <string name="add_category">Añadir categoría</string>
+    <string name="rename_category">Cambiar nombre de la categoría</string>
+    <string name="category_name">Nombre de la categoría</string>
+    <string name="category_exists">%1$s ya existe</string>
+    <string name="move_up">Subir</string>
+    <string name="move_down">Bajar</string>
+    <string name="delete_category_title">¿Eliminar %1$s?</string>
+    <plurals name="delete_category_message">
+        <item quantity="one">Su %d artículo pasa a Otros.</item>
+        <item quantity="many">Sus %d artículos pasan a Otros.</item>
+        <item quantity="other">Sus %d artículos pasan a Otros.</item>
+    </plurals>
+    <string name="category_deleted">%1$s eliminada</string>
+
+    <!-- 7 Settings -->
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_section_appearance">Apariencia</string>
+    <string name="settings_section_lists">Listas</string>
+    <string name="settings_section_data">Datos</string>
+    <string name="settings_section_about">Información</string>
+    <string name="setting_theme">Tema</string>
+    <string name="theme_system">Sistema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="setting_language">Idioma</string>
+    <string name="language_system">Sistema</string>
+    <string name="setting_move_ticked">Bajar los artículos marcados</string>
+    <string name="setting_move_ticked_summary">Los artículos marcados pasan a En la cesta, al final de cada lista</string>
+    <string name="setting_categories">Categorías</string>
+    <string name="setting_refresh_catalog">Actualizar el catálogo</string>
+    <string name="last_updated">Actualizado el %1$s</string>
+    <string name="catalog_not_downloaded">Aún no se ha descargado</string>
+    <string name="catalog_updated">Catálogo actualizado</string>
+    <string name="setting_reset">Restablecer datos de ejemplo</string>
+    <string name="reset_title">¿Restablecer todas las listas?</string>
+    <string name="reset_message">Tus listas y categorías se sustituirán por los datos de ejemplo. No se puede deshacer.</string>
+    <string name="reset_confirm">Restablecer</string>
+    <string name="version">Versión %1$s</string>
+    <string name="data_credit">Datos de productos: DummyJSON (dummyjson.com)</string>
+</resources>

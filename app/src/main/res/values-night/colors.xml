@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Basket colour tokens, DARK. Same names as values/colors.xml. -->
+<resources>
+    <color name="bk_primary">#8DD8A5</color>
+    <color name="bk_on_primary">#003919</color>
+    <color name="bk_primary_container">#005229</color>
+    <color name="bk_on_primary_container">#A8F5C0</color>
+    <color name="bk_secondary">#B6CCB8</color>
+    <color name="bk_on_secondary">#223527</color>
+    <color name="bk_secondary_container">#374B3B</color>
+    <color name="bk_on_secondary_container">#D2E8D4</color>
+    <color name="bk_tertiary">#A2CDD9</color>
+    <color name="bk_on_tertiary">#00363F</color>
+    <color name="bk_tertiary_container">#204C56</color>
+    <color name="bk_on_tertiary_container">#BEEAF6</color>
+    <color name="bk_error">#FFB4AB</color>
+    <color name="bk_on_error">#690005</color>
+    <color name="bk_error_container">#93000A</color>
+    <color name="bk_on_error_container">#FFDAD6</color>
+    <color name="bk_surface">#101410</color>
+    <color name="bk_on_surface">#DFE4DC</color>
+    <color name="bk_surface_variant">#414941</color>
+    <color name="bk_on_surface_variant">#C1C9BE</color>
+    <color name="bk_surface_container_lowest">#0B0F0B</color>
+    <color name="bk_surface_container_low">#181D18</color>
+    <color name="bk_surface_container">#1C211C</color>
+    <color name="bk_surface_container_high">#272B27</color>
+    <color name="bk_surface_container_highest">#323632</color>
+    <color name="bk_outline">#8B938A</color>
+    <color name="bk_outline_variant">#414941</color>
+    <color name="bk_inverse_surface">#DFE4DC</color>
+    <color name="bk_inverse_on_surface">#2D322D</color>
+    <color name="bk_inverse_primary">#1E6B3F</color>
+    <color name="bk_success">#7CD98A</color>
+    <color name="bk_on_success">#003912</color>
+    <color name="bk_warning">#F5BE48</color>
+    <color name="bk_on_warning">#402D00</color>
+    <color name="bk_warning_container">#5C4300</color>
+    <color name="bk_on_warning_container">#FFDF9E</color>
+    <color name="bk_brand_seed">#2F9E57</color>
+</resources>

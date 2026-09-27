@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Theme.Basket — Material Components 1.12+ (Material 3). DayNight: values-night/colors.xml supplies the dark roles.
+  Compose screens use BasketTheme (ui/theme); both read the same hex values, so XML and Compose screens look identical.
+-->
+<resources>
+    <style name="Theme.Basket" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/bk_primary</item>
+        <item name="colorOnPrimary">@color/bk_on_primary</item>
+        <item name="colorPrimaryContainer">@color/bk_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/bk_on_primary_container</item>
+        <item name="colorSecondary">@color/bk_secondary</item>
+        <item name="colorOnSecondary">@color/bk_on_secondary</item>
+        <item name="colorSecondaryContainer">@color/bk_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/bk_on_secondary_container</item>
+        <item name="colorTertiary">@color/bk_tertiary</item>
+        <item name="colorOnTertiary">@color/bk_on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/bk_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/bk_on_tertiary_container</item>
+        <item name="colorError">@color/bk_error</item>
+        <item name="colorOnError">@color/bk_on_error</item>
+        <item name="colorErrorContainer">@color/bk_error_container</item>
+        <item name="colorOnErrorContainer">@color/bk_on_error_container</item>
+        <item name="android:colorBackground">@color/bk_surface</item>
+        <item name="colorOnBackground">@color/bk_on_surface</item>
+        <item name="colorSurface">@color/bk_surface</item>
+        <item name="colorOnSurface">@color/bk_on_surface</item>
+        <item name="colorSurfaceVariant">@color/bk_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/bk_on_surface_variant</item>
+        <item name="colorSurfaceContainerLowest">@color/bk_surface_container_lowest</item>
+        <item name="colorSurfaceContainerLow">@color/bk_surface_container_low</item>
+        <item name="colorSurfaceContainer">@color/bk_surface_container</item>
+        <item name="colorSurfaceContainerHigh">@color/bk_surface_container_high</item>
+        <item name="colorSurfaceContainerHighest">@color/bk_surface_container_highest</item>
+        <item name="colorOutline">@color/bk_outline</item>
+        <item name="colorOutlineVariant">@color/bk_outline_variant</item>
+        <item name="colorSurfaceInverse">@color/bk_inverse_surface</item>
+        <item name="colorOnSurfaceInverse">@color/bk_inverse_on_surface</item>
+        <item name="colorPrimaryInverse">@color/bk_inverse_primary</item>
+
+        <item name="colorSuccess">@color/bk_success</item>
+        <item name="colorOnSuccess">@color/bk_on_success</item>
+        <item name="colorWarning">@color/bk_warning</item>
+        <item name="colorOnWarning">@color/bk_on_warning</item>
+        <item name="colorWarningContainer">@color/bk_warning_container</item>
+        <item name="colorOnWarningContainer">@color/bk_on_warning_container</item>
+
+        <item name="shapeAppearanceCornerExtraSmall">@style/ShapeAppearance.Basket.ExtraSmall</item>
+        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.Basket.Small</item>
+        <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.Basket.Medium</item>
+        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.Basket.Large</item>
+        <item name="shapeAppearanceCornerExtraLarge">@style/ShapeAppearance.Basket.ExtraLarge</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Basket.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Basket.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Basket.Large</item>
+
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.Basket.DisplaySmall</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Basket.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Basket.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Basket.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.Basket.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.Basket.TitleSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Basket.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Basket.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.Basket.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Basket.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.Basket.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.Basket.LabelSmall</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- Shape tokens: small = chips/badges, medium = cards/rows, large = sheets/dialogs (same as BasketShapes). -->
+    <style name="ShapeAppearance.Basket.ExtraSmall" parent=""><item name="cornerFamily">rounded</item><item name="cornerSize">4dp</item></style>
+    <style name="ShapeAppearance.Basket.Small" parent=""><item name="cornerFamily">rounded</item><item name="cornerSize">8dp</item></style>
+    <style name="ShapeAppearance.Basket.Medium" parent=""><item name="cornerFamily">rounded</item><item name="cornerSize">12dp</item></style>
+    <style name="ShapeAppearance.Basket.Large" parent=""><item name="cornerFamily">rounded</item><item name="cornerSize">16dp</item></style>
+    <style name="ShapeAppearance.Basket.ExtraLarge" parent=""><item name="cornerFamily">rounded</item><item name="cornerSize">28dp</item></style>
+
+    <!-- Material 3 type scale (sp), same values as BasketTypography. -->
+    <style name="TextAppearance.Basket.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall"><item name="android:textSize">36sp</item><item name="lineHeight">44sp</item></style>
+    <style name="TextAppearance.Basket.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium"><item name="android:textSize">28sp</item><item name="lineHeight">36sp</item></style>
+    <style name="TextAppearance.Basket.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall"><item name="android:textSize">24sp</item><item name="lineHeight">32sp</item></style>
+    <style name="TextAppearance.Basket.TitleLarge" parent="TextAppearance.Material3.TitleLarge"><item name="android:textSize">22sp</item><item name="lineHeight">28sp</item></style>
+    <style name="TextAppearance.Basket.TitleMedium" parent="TextAppearance.Material3.TitleMedium"><item name="fontFamily">sans-serif-medium</item><item name="android:textSize">16sp</item><item name="lineHeight">24sp</item></style>
+    <style name="TextAppearance.Basket.TitleSmall" parent="TextAppearance.Material3.TitleSmall"><item name="fontFamily">sans-serif-medium</item><item name="android:textSize">14sp</item><item name="lineHeight">20sp</item></style>
+    <style name="TextAppearance.Basket.BodyLarge" parent="TextAppearance.Material3.BodyLarge"><item name="android:textSize">16sp</item><item name="lineHeight">24sp</item></style>
+    <style name="TextAppearance.Basket.BodyMedium" parent="TextAppearance.Material3.BodyMedium"><item name="android:textSize">14sp</item><item name="lineHeight">20sp</item></style>
+    <style name="TextAppearance.Basket.BodySmall" parent="TextAppearance.Material3.BodySmall"><item name="android:textSize">12sp</item><item name="lineHeight">16sp</item></style>
+    <style name="TextAppearance.Basket.LabelLarge" parent="TextAppearance.Material3.LabelLarge"><item name="fontFamily">sans-serif-medium</item><item name="android:textSize">14sp</item><item name="lineHeight">20sp</item></style>
+    <style name="TextAppearance.Basket.LabelMedium" parent="TextAppearance.Material3.LabelMedium"><item name="fontFamily">sans-serif-medium</item><item name="android:textSize">12sp</item><item name="lineHeight">16sp</item></style>
+    <style name="TextAppearance.Basket.LabelSmall" parent="TextAppearance.Material3.LabelSmall"><item name="fontFamily">sans-serif-medium</item><item name="android:textSize">11sp</item><item name="lineHeight">16sp</item></style>
+
+    <!-- Money styles with tabular figures (same as BasketMoneyStyles). -->
+    <style name="TextAppearance.Basket.Money.Display" parent="TextAppearance.Material3.HeadlineMedium"><item name="fontFamily">sans-serif-medium</item><item name="android:textSize">28sp</item><item name="lineHeight">36sp</item><item name="android:fontFeatureSettings">tnum</item></style>
+    <style name="TextAppearance.Basket.Money.Title" parent="TextAppearance.Material3.TitleLarge"><item name="fontFamily">sans-serif-medium</item><item name="android:textSize">22sp</item><item name="lineHeight">28sp</item><item name="android:fontFeatureSettings">tnum</item></style>
+    <style name="TextAppearance.Basket.Money.Body" parent="TextAppearance.Material3.BodyLarge"><item name="android:textSize">16sp</item><item name="lineHeight">24sp</item><item name="android:fontFeatureSettings">tnum</item></style>
+    <style name="TextAppearance.Basket.Money.Small" parent="TextAppearance.Material3.BodyMedium"><item name="android:textSize">14sp</item><item name="lineHeight">20sp</item><item name="android:fontFeatureSettings">tnum</item></style>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 4 Browse products -->
+    <string name="browse_loading">Cargando productos</string>
+    <string name="browse_empty_category">No hay productos en %1$s</string>
+    <string name="browse_show_all">Ver todos los productos</string>
+</resources>

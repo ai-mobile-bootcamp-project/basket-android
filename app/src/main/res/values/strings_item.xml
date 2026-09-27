@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Extra strings for 3 Add / edit item and 5 Product detail. -->
+<resources>
+    <string name="quantity_a11y">Quantity %d</string>
+</resources>

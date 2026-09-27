@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 4 Browse products -->
+    <string name="browse_loading">جارٍ تحميل المنتجات</string>
+    <string name="browse_empty_category">لا توجد منتجات في %1$s</string>
+    <string name="browse_show_all">عرض كل المنتجات</string>
+</resources>

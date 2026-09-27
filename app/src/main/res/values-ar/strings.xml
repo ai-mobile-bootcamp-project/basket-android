@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Basket</string>
+
+    <!-- Common actions -->
+    <string name="action_cancel">إلغاء</string>
+    <string name="action_create">إنشاء</string>
+    <string name="action_save">حفظ</string>
+    <string name="action_delete">حذف</string>
+    <string name="action_remove">إزالة</string>
+    <string name="action_rename">إعادة تسمية</string>
+    <string name="action_duplicate">تكرار</string>
+    <string name="action_undo">تراجع</string>
+    <string name="action_retry">إعادة المحاولة</string>
+    <string name="action_edit">تعديل</string>
+    <string name="action_more">المزيد</string>
+    <string name="action_less">أقل</string>
+
+    <!-- Spoken labels for icon-only buttons -->
+    <string name="cd_back">رجوع</string>
+    <string name="cd_close">إغلاق</string>
+    <string name="cd_settings">الإعدادات</string>
+    <string name="cd_more_options">خيارات إضافية</string>
+    <string name="cd_share_list">مشاركة القائمة</string>
+    <string name="cd_add_product">إضافة %1$s إلى القائمة</string>
+    <string name="cd_increase_quantity">زيادة الكمية</string>
+    <string name="cd_decrease_quantity">تقليل الكمية</string>
+    <string name="cd_delete_item">حذف العنصر</string>
+    <string name="cd_reorder_category">إعادة ترتيب %1$s</string>
+    <string name="cd_from_catalog">من الكتالوج</string>
+    <string name="cd_clear_search">مسح البحث</string>
+    <string name="cd_locked_category">دائمًا في الأخير</string>
+    <string name="cd_expand">توسيع</string>
+    <string name="cd_collapse">طي</string>
+
+    <!-- Categories (default names) -->
+    <string name="category_fruit_veg">فواكه وخضروات</string>
+    <string name="category_bakery">مخبوزات</string>
+    <string name="category_dairy_eggs">ألبان وبيض</string>
+    <string name="category_meat_fish">لحوم وأسماك</string>
+    <string name="category_pantry">مؤن</string>
+    <string name="category_frozen">مجمدات</string>
+    <string name="category_drinks">مشروبات</string>
+    <string name="category_household_pets">منزل وحيوانات أليفة</string>
+    <string name="category_other">أخرى</string>
+
+    <!-- 1 Lists -->
+    <string name="new_list">قائمة جديدة</string>
+    <string name="new_list_hint">مثلًا: تسوق الأسبوع</string>
+    <string name="list_name_label">اسم القائمة</string>
+    <string name="rename_list">إعادة تسمية القائمة</string>
+    <string name="list_copy_name">%1$s (نسخة)</string>
+    <string name="lists_empty_title">لا توجد قوائم بعد</string>
+    <string name="lists_empty_action">أنشئ قائمتك الأولى</string>
+    <string name="list_card_no_items">لا توجد عناصر بعد</string>
+    <plurals name="list_card_progress">
+        <item quantity="zero">%1$d من %2$d في السلة</item>
+        <item quantity="one">%1$d من %2$d في السلة</item>
+        <item quantity="two">%1$d من %2$d في السلة</item>
+        <item quantity="few">%1$d من %2$d في السلة</item>
+        <item quantity="many">%1$d من %2$d في السلة</item>
+        <item quantity="other">%1$d من %2$d في السلة</item>
+    </plurals>
+    <plurals name="list_card_without_price">
+        <item quantity="zero">+ %d بدون سعر</item>
+        <item quantity="one">+ عنصر واحد بدون سعر</item>
+        <item quantity="two">+ عنصران بدون سعر</item>
+        <item quantity="few">+ %d عناصر بدون سعر</item>
+        <item quantity="many">+ %d عنصرًا بدون سعر</item>
+        <item quantity="other">+ %d عنصر بدون سعر</item>
+    </plurals>
+    <string name="without_price">عناصر بدون سعر</string>
+    <string name="list_card_done">تم</string>
+    <string name="list_deleted">تم حذف %1$s</string>
+
+    <!-- 2 List detail -->
+    <string name="action_share">مشاركة</string>
+    <string name="menu_clear_basket">إفراغ السلة</string>
+    <string name="menu_finish_shopping">إنهاء التسوق</string>
+    <string name="section_header">%1$s · %2$d</string>
+    <string name="in_basket_header">في السلة · %d</string>
+    <string name="totals_total">الإجمالي %1$s</string>
+    <string name="totals_in_basket">في السلة %1$s</string>
+    <plurals name="items_without_price">
+        <item quantity="zero">لا عناصر بدون سعر</item>
+        <item quantity="one">عنصر واحد بدون سعر</item>
+        <item quantity="two">عنصران بدون سعر</item>
+        <item quantity="few">%d عناصر بدون سعر</item>
+        <item quantity="many">%d عنصرًا بدون سعر</item>
+        <item quantity="other">%d عنصر بدون سعر</item>
+    </plurals>
+    <string name="add_item">إضافة عنصر</string>
+    <string name="browse_products">تصفح المنتجات</string>
+    <string name="list_empty">لا شيء في هذه القائمة بعد</string>
+    <string name="item_quantity_price">%1$d × %2$s</string>
+    <string name="price_missing">—</string>
+    <string name="item_removed">تمت إزالة %1$s</string>
+    <plurals name="clear_basket_title">
+        <item quantity="zero">إزالة %d عنصر من السلة؟</item>
+        <item quantity="one">إزالة عنصر واحد من السلة؟</item>
+        <item quantity="two">إزالة عنصرين من السلة؟</item>
+        <item quantity="few">إزالة %d عناصر من السلة؟</item>
+        <item quantity="many">إزالة %d عنصرًا من السلة؟</item>
+        <item quantity="other">إزالة %d عنصر من السلة؟</item>
+    </plurals>
+    <plurals name="clear_basket_message">
+        <item quantity="zero">لا توجد عناصر متبقية للشراء.</item>
+        <item quantity="one">يبقى عنصر واحد متبقٍ للشراء في القائمة.</item>
+        <item quantity="two">يبقى عنصران متبقيان للشراء في القائمة.</item>
+        <item quantity="few">تبقى %d عناصر متبقية للشراء في القائمة.</item>
+        <item quantity="many">يبقى %d عنصرًا متبقيًا للشراء في القائمة.</item>
+        <item quantity="other">يبقى %d عنصر متبقٍ للشراء في القائمة.</item>
+    </plurals>
+    <plurals name="finish_summary">
+        <item quantity="zero">تم شراء %1$d من %2$d · أُنفق %3$s</item>
+        <item quantity="one">تم شراء %1$d من %2$d · أُنفق %3$s</item>
+        <item quantity="two">تم شراء %1$d من %2$d · أُنفق %3$s</item>
+        <item quantity="few">تم شراء %1$d من %2$d · أُنفق %3$s</item>
+        <item quantity="many">تم شراء %1$d من %2$d · أُنفق %3$s</item>
+        <item quantity="other">تم شراء %1$d من %2$d · أُنفق %3$s</item>
+    </plurals>
+    <string name="finish_not_bought">لم يُشترَ: %1$s</string>
+    <string name="finish_keep_rest">إبقاء الباقي في هذه القائمة</string>
+    <string name="finish_keep_all">إبقاء القائمة كما هي</string>
+    <string name="item_a11y_not_in_basket">%1$s، %2$d بسعر %3$s، %4$s، ليس في السلة</string>
+    <string name="item_a11y_in_basket">%1$s، %2$d بسعر %3$s، %4$s، في السلة</string>
+    <string name="item_a11y_no_price_not_in_basket">%1$s، %2$d، بدون سعر، ليس في السلة</string>
+    <string name="item_a11y_no_price_in_basket">%1$s، %2$d، بدون سعر، في السلة</string>
+    <string name="share_chooser_title">مشاركة القائمة</string>
+    <string name="share_to_buy">للشراء (%d)</string>
+    <string name="share_in_basket">في السلة (%d)</string>
+    <string name="share_total">الإجمالي %1$s</string>
+    <plurals name="share_total_without_price">
+        <item quantity="zero">الإجمالي %2$s (%1$d عنصر بدون سعر)</item>
+        <item quantity="one">الإجمالي %2$s (عنصر واحد بدون سعر)</item>
+        <item quantity="two">الإجمالي %2$s (عنصران بدون سعر)</item>
+        <item quantity="few">الإجمالي %2$s (%1$d عناصر بدون سعر)</item>
+        <item quantity="many">الإجمالي %2$s (%1$d عنصرًا بدون سعر)</item>
+        <item quantity="other">الإجمالي %2$s (%1$d عنصر بدون سعر)</item>
+    </plurals>
+
+    <!-- 3 Add / edit item -->
+    <string name="add_item_title">إضافة عنصر</string>
+    <string name="edit_item_title">تعديل العنصر</string>
+    <string name="field_name">الاسم</string>
+    <string name="field_quantity">الكمية</string>
+    <string name="field_unit_price">سعر الوحدة</string>
+    <string name="field_category">الفئة</string>
+    <string name="field_note">ملاحظة</string>
+    <string name="note_hint">مثلًا: مقطّع</string>
+    <string name="line_total">%1$d × %2$s = %3$s</string>
+    <string name="add_to_list">إضافة إلى %1$s</string>
+    <string name="save_changes">حفظ التغييرات</string>
+    <string name="error_name">أدخل اسمًا</string>
+    <string name="error_price">أدخل سعرًا بين %1$s و%2$s</string>
+    <string name="duplicate_title">%1$s موجود بالفعل في هذه القائمة</string>
+    <plurals name="duplicate_add_more">
+        <item quantity="zero">إضافة %d أخرى</item>
+        <item quantity="one">إضافة واحد آخر</item>
+        <item quantity="two">إضافة اثنين آخرين</item>
+        <item quantity="few">إضافة %d أخرى</item>
+        <item quantity="many">إضافة %d أخرى</item>
+        <item quantity="other">إضافة %d أخرى</item>
+    </plurals>
+    <string name="discard_title">تجاهل التغييرات؟</string>
+    <string name="keep_editing">متابعة التعديل</string>
+    <string name="discard">تجاهل</string>
+    <string name="item_added">تمت إضافة %1$s</string>
+    <string name="changes_saved">تم حفظ التغييرات</string>
+
+    <!-- 4 Browse products -->
+    <string name="browse_title">تصفح المنتجات</string>
+    <string name="browse_subtitle">الإضافة إلى %1$s</string>
+    <string name="search_hint">البحث في البقالة</string>
+    <string name="chip_all">الكل</string>
+    <plurals name="product_count">
+        <item quantity="zero">لا منتجات</item>
+        <item quantity="one">منتج واحد</item>
+        <item quantity="two">منتجان</item>
+        <item quantity="few">%d منتجات</item>
+        <item quantity="many">%d منتجًا</item>
+        <item quantity="other">%d منتج</item>
+    </plurals>
+    <string name="discount_badge">−%d%%</string>
+    <string name="stock_in">متوفر</string>
+    <string name="stock_low">كمية محدودة</string>
+    <string name="stock_out">نفد من المخزون</string>
+    <string name="offline_banner">أنت غير متصل · عرض المنتجات المحفوظة في %1$s</string>
+    <string name="error_load_title">تعذّر تحميل المنتجات</string>
+    <string name="error_offline_message">تحقق من الاتصال وحاول مرة أخرى.</string>
+    <string name="error_server_message">حدث خطأ من جهتنا.</string>
+    <string name="no_results">لا توجد منتجات تطابق “%1$s”</string>
+    <string name="clear_search">مسح البحث</string>
+    <string name="product_added">تمت إضافة %1$s إلى %2$s</string>
+    <string name="product_updated">تم تحديث %1$s</string>
+
+    <!-- 5 Product detail -->
+    <string name="save_percent">وفّر %d%%</string>
+    <string name="on_your_list">في قائمتك: %d</string>
+    <string name="add_to_list_price">إضافة إلى %1$s · %2$s</string>
+    <string name="update_list">تحديث القائمة</string>
+    <string name="rating_label">التقييم %1$s من 5</string>
+
+    <!-- 6 Categories -->
+    <string name="categories_title">الفئات</string>
+    <string name="categories_subtitle">اسحب لتطابق ممرات متجرك</string>
+    <plurals name="category_item_count">
+        <item quantity="zero">لا عناصر</item>
+        <item quantity="one">عنصر واحد</item>
+        <item quantity="two">عنصران</item>
+        <item quantity="few">%d عناصر</item>
+        <item quantity="many">%d عنصرًا</item>
+        <item quantity="other">%d عنصر</item>
+    </plurals>
+    <string name="add_category">إضافة فئة</string>
+    <string name="rename_category">إعادة تسمية الفئة</string>
+    <string name="category_name">اسم الفئة</string>
+    <string name="category_exists">%1$s موجودة بالفعل</string>
+    <string name="move_up">نقل لأعلى</string>
+    <string name="move_down">نقل لأسفل</string>
+    <string name="delete_category_title">حذف %1$s؟</string>
+    <plurals name="delete_category_message">
+        <item quantity="zero">لا توجد عناصر لنقلها.</item>
+        <item quantity="one">ينتقل عنصرها الوحيد إلى أخرى.</item>
+        <item quantity="two">ينتقل عنصراها إلى أخرى.</item>
+        <item quantity="few">تنتقل عناصرها الـ%d إلى أخرى.</item>
+        <item quantity="many">تنتقل عناصرها الـ%d إلى أخرى.</item>
+        <item quantity="other">تنتقل عناصرها الـ%d إلى أخرى.</item>
+    </plurals>
+    <string name="category_deleted">تم حذف %1$s</string>
+
+    <!-- 7 Settings -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_section_appearance">المظهر</string>
+    <string name="settings_section_lists">القوائم</string>
+    <string name="settings_section_data">البيانات</string>
+    <string name="settings_section_about">حول التطبيق</string>
+    <string name="setting_theme">المظهر</string>
+    <string name="theme_system">النظام</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_dark">داكن</string>
+    <string name="setting_language">اللغة</string>
+    <string name="language_system">النظام</string>
+    <string name="setting_move_ticked">نقل العناصر المحددة للأسفل</string>
+    <string name="setting_move_ticked_summary">تنتقل العناصر المحددة إلى \"في السلة\" أسفل كل قائمة</string>
+    <string name="setting_categories">الفئات</string>
+    <string name="setting_refresh_catalog">تحديث كتالوج المنتجات</string>
+    <string name="last_updated">آخر تحديث %1$s</string>
+    <string name="catalog_not_downloaded">لم يُنزَّل بعد</string>
+    <string name="catalog_updated">تم تحديث الكتالوج</string>
+    <string name="setting_reset">إعادة تعيين البيانات النموذجية</string>
+    <string name="reset_title">إعادة تعيين كل القوائم؟</string>
+    <string name="reset_message">سيتم استبدال قوائمك وفئاتك بالبيانات النموذجية. لا يمكن التراجع عن ذلك.</string>
+    <string name="reset_confirm">إعادة تعيين</string>
+    <string name="version">الإصدار %1$s</string>
+    <string name="data_credit">بيانات المنتجات: DummyJSON (dummyjson.com)</string>
+</resources>

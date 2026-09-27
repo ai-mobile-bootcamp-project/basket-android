@@ -1,0 +1,45 @@
+{
+  "categories": [
+    "FRUIT_VEG",
+    "BAKERY",
+    "DAIRY_EGGS",
+    "MEAT_FISH",
+    "PANTRY",
+    "FROZEN",
+    "DRINKS",
+    "HOUSEHOLD_PETS",
+    "OTHER"
+  ],
+  "lists": [
+    {
+      "name": "Weekly shop",
+      "items": [
+        { "name": "Apple", "category": "FRUIT_VEG", "quantity": 6, "priceCents": 174, "catalogProductId": 16 },
+        { "name": "Cucumber", "category": "FRUIT_VEG", "quantity": 2, "priceCents": 149, "catalogProductId": 21 },
+        { "name": "Strawberry", "category": "FRUIT_VEG", "quantity": 1, "priceCents": 395, "catalogProductId": 40 },
+        { "name": "Potatoes", "category": "FRUIT_VEG", "quantity": 2, "priceCents": 217, "catalogProductId": 35, "ticked": true },
+        { "name": "Sourdough bread", "category": "BAKERY", "quantity": 1, "note": "sliced" },
+        { "name": "Eggs", "category": "DAIRY_EGGS", "quantity": 1, "priceCents": 266, "catalogProductId": 23, "ticked": true },
+        { "name": "Milk", "category": "DAIRY_EGGS", "quantity": 2, "priceCents": 301, "catalogProductId": 32 },
+        { "name": "Rice", "category": "PANTRY", "quantity": 1, "priceCents": 543, "catalogProductId": 38 },
+        { "name": "Nescafe Coffee", "category": "DRINKS", "quantity": 1, "priceCents": 786, "catalogProductId": 34 },
+        { "name": "Tissue Paper Box", "category": "HOUSEHOLD_PETS", "quantity": 1, "priceCents": 216, "catalogProductId": 41, "ticked": true }
+      ]
+    },
+    {
+      "name": "BBQ Saturday",
+      "items": [
+        { "name": "Beef Steak", "category": "MEAT_FISH", "quantity": 4, "priceCents": 1174, "catalogProductId": 17 },
+        { "name": "Chicken Meat", "category": "MEAT_FISH", "quantity": 2, "priceCents": 862, "catalogProductId": 19 },
+        { "name": "Red Onions", "category": "FRUIT_VEG", "quantity": 3, "priceCents": 179, "catalogProductId": 37 },
+        { "name": "Green Bell Pepper", "category": "FRUIT_VEG", "quantity": 4, "priceCents": 129, "catalogProductId": 25 },
+        { "name": "Soft Drinks", "category": "DRINKS", "quantity": 12, "priceCents": 164, "catalogProductId": 39 },
+        { "name": "Charcoal", "category": "OTHER", "quantity": 1, "priceCents": 850 }
+      ]
+    },
+    {
+      "name": "Camping trip",
+      "items": []
+    }
+  ]
+}
