@@ -4,6 +4,15 @@ Android shopping-list app: keep several grocery lists, add items by hand or from
 
 ## Screens
 
+Designs from the Basket design handover (light theme, English).
+
+<table>
+<tr><td align="center"><img src="docs/screens/00-welcome.png" width="180" alt="Welcome"></td><td align="center"><img src="docs/screens/01-lists.png" width="180" alt="Lists"></td><td align="center"><img src="docs/screens/02-list-detail.png" width="180" alt="List detail"></td><td align="center"><img src="docs/screens/03-add-edit-item.png" width="180" alt="Add / edit item"></td></tr>
+<tr><td align="center">Welcome</td><td align="center">Lists</td><td align="center">List detail</td><td align="center">Add / edit item</td></tr>
+<tr><td align="center"><img src="docs/screens/04-browse-products.png" width="180" alt="Browse products"></td><td align="center"><img src="docs/screens/05-product-detail.png" width="180" alt="Product detail"></td><td align="center"><img src="docs/screens/06-categories.png" width="180" alt="Categories"></td><td align="center"><img src="docs/screens/07-settings.png" width="180" alt="Settings"></td></tr>
+<tr><td align="center">Browse products</td><td align="center">Product detail</td><td align="center">Categories</td><td align="center">Settings</td></tr>
+</table>
+
 Welcome (first launch) · Lists · List detail (+ Finish shopping sheet) · Browse products (Compose) · Add / edit item · Product detail · Categories · Settings (Fragments + XML views), all hosted in one Compose `NavHost`.
 
 ## Stack
