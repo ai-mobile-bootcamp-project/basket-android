@@ -44,358 +44,399 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 
 31 bug reports and 5 feature requests. Tickets use the sample lists: tap **Get started** on first launch, or **Settings → Reset sample data**.
 
+### Overview
+
+| ID | Type | Screen | Ticket |
+|---|---|---|---|
+| [BK-101](#bk-101) | Bug | Lists | Card says "1 items without price" |
+| [BK-102](#bk-102) | Bug | Lists | Card total doesn't match the list |
+| [BK-103](#bk-103) | Bug | Lists | Progress bar is full at "3 of 10" |
+| [BK-104](#bk-104) | Bug | Lists | Deleted a list by mistake and there's no Undo |
+| [BK-105](#bk-105) | Bug | List detail | Ticked items stay in the middle of the list |
+| [BK-106](#bk-106) | Bug | List detail | Swiping Milk removed a different item |
+| [BK-107](#bk-107) | Bug | List detail | Undo after removing an item does nothing |
+| [BK-108](#bk-108) | Bug | List detail | Sourdough bread shows $0.00 |
+| [BK-109](#bk-109) | Bug | Browse → List detail | Apple is $1.74 in Browse but $1.73 on my list |
+| [BK-110](#bk-110) | Bug | List detail | "Clear basket" deleted my whole list |
+| [BK-111](#bk-111) | Bug | List detail | Aisles are in alphabetical order |
+| [BK-112](#bk-112) | Bug | List detail | Sharing an empty list crashes the app |
+| [BK-113](#bk-113) | Bug | Add / edit item | Editing an item makes a copy of it |
+| [BK-114](#bk-114) | Bug | Add / edit item | Quantity can go to 0 and −1 |
+| [BK-115](#bk-115) | Bug | Add / edit item | In Spanish, 1,99 becomes 199,00 |
+| [BK-116](#bk-116) | Bug | Add / edit item | Back after saving opens the form again |
+| [BK-117](#bk-117) | Bug | Add / edit item | Double-tapping Save adds the item twice |
+| [BK-118](#bk-118) | Bug | Browse products | Browse shows a sofa, a bed and perfume |
+| [BK-119](#bk-119) | Bug | Browse products | Searching "apple" shows iPhones |
+| [BK-120](#bk-120) | Bug | Browse products | The app crashes without internet |
+| [BK-121](#bk-121) | Bug | Browse products | Offline, Browse forgets the products it already loaded |
+| [BK-122](#bk-122) | Bug | Browse products | Adding one Beef Steak adds 43 |
+| [BK-123](#bk-123) | Bug | Browse products | Adding Apple again makes a second Apple row |
+| [BK-124](#bk-124) | Bug | Browse products | Green Chili Pepper doesn't say "Low stock" |
+| [BK-125](#bk-125) | Bug | Categories | Deleting a category deleted its items |
+| [BK-126](#bk-126) | Bug | Settings | Dark theme turns off after reopening the app |
+| [BK-127](#bk-127) | Bug | Whole app | Spanish is half English, and prices use "$" |
+| [BK-128](#bk-128) | Bug | Whole app | Arabic isn't right-to-left |
+| [BK-129](#bk-129) | Bug | Whole app | Dark mode has white rows and cards |
+| [BK-130](#bk-130) | Bug | Whole app | Prices are cut off with large text |
+| [BK-131](#bk-131) | Bug | Whole app | TalkBack says just "Button" |
+| [BK-201](#bk-201) | Feature | New screen | Spending by aisle |
+| [BK-202](#bk-202) | Feature | New button | Untick all |
+| [BK-203](#bk-203) | Feature | New functionality | Quick add on List detail |
+| [BK-204](#bk-204) | Feature | New text | Item count under the list name |
+| [BK-205](#bk-205) | Feature | New button | Share a list from the Lists screen |
+
 ### Bug reports
 
-#### BK-101 · Lists · Card says "1 items without price"
-*Reported by: QA*
+<a id="bk-101"></a>
 
-**Steps**
-1. Open **Lists**.
-2. Look at the **Weekly shop** card, under the total.
+#### BK-101 · Card says "1 items without price"
 
-**Expected:** "+ 1 without price". Every count is grammatical in English, Spanish and Arabic ("1 item", "2 items").
+| **Screen** | Lists |
+|---|---|
+| **Reported by** | QA |
+| **Steps** | 1. Open **Lists**.<br>2. Look at the **Weekly shop** card, under the total. |
+| **Expected** | "+ 1 without price". Every count is grammatical in English, Spanish and Arabic ("1 item", "2 items"). |
+| **Actual** | "+ 1 items without price". |
 
-**Actual:** "+ 1 items without price".
+<a id="bk-102"></a>
 
-#### BK-102 · Lists · Card total doesn't match the list
-*Reported by: App review, 2★*
+#### BK-102 · Card total doesn't match the list
 
-**Steps**
-1. Open **Lists** and note the total on the **Weekly shop** card.
-2. Open **Weekly shop** and look at the footer.
+| **Screen** | Lists |
+|---|---|
+| **Reported by** | App review, 2★ |
+| **Steps** | 1. Open **Lists** and note the total on the **Weekly shop** card.<br>2. Open **Weekly shop** and look at the footer. |
+| **Expected** | The card and the footer show the same total: **$45.84** for Weekly shop and **$102.91** for BBQ Saturday. |
+| **Actual** | The card shows **$30.47** (BBQ Saturday **$33.58**) while the list says $45.84. |
 
-**Expected:** The card and the footer show the same total: **$45.84** for Weekly shop and **$102.91** for BBQ Saturday.
+<a id="bk-103"></a>
 
-**Actual:** The card shows **$30.47** (BBQ Saturday **$33.58**) while the list says $45.84.
+#### BK-103 · Progress bar is full at "3 of 10"
 
-#### BK-103 · Lists · Progress bar is full at "3 of 10"
-*Reported by: QA*
+| **Screen** | Lists |
+|---|---|
+| **Reported by** | QA |
+| **Steps** | 1. Open **Lists**.<br>2. Look at the **Weekly shop** card: "3 of 10 in basket". |
+| **Expected** | The bar is 30% filled (3 of 10). |
+| **Actual** | The bar is completely full. |
 
-**Steps**
-1. Open **Lists**.
-2. Look at the **Weekly shop** card: "3 of 10 in basket".
+<a id="bk-104"></a>
 
-**Expected:** The bar is 30% filled (3 of 10).
+#### BK-104 · Deleted a list by mistake and there's no Undo
 
-**Actual:** The bar is completely full.
+| **Screen** | Lists |
+|---|---|
+| **Reported by** | Support |
+| **Steps** | 1. Open **Lists**.<br>2. Tap ⋮ on **BBQ Saturday** → **Delete**. |
+| **Expected** | The list disappears and the message "BBQ Saturday deleted" offers **Undo** for 5 seconds. Undo brings the list back exactly as it was (items, ticks, position). |
+| **Actual** | The message appears without Undo. The list is gone for good. |
 
-#### BK-104 · Lists · Deleted a list by mistake and there's no Undo
-*Reported by: Support*
+<a id="bk-105"></a>
 
-**Steps**
-1. Open **Lists**.
-2. Tap ⋮ on **BBQ Saturday** → **Delete**.
+#### BK-105 · Ticked items stay in the middle of the list
 
-**Expected:** The list disappears and the message "BBQ Saturday deleted" offers **Undo** for 5 seconds. Undo brings the list back exactly as it was (items, ticks, position).
+| **Screen** | List detail |
+|---|---|
+| **Reported by** | App review, 3★ |
+| **Steps** | 1. Check that **Settings → Move ticked items down** is on (it is by default).<br>2. Open **Weekly shop** and tick **Apple**. |
+| **Expected** | Apple moves into the **In basket** section at the bottom ("In basket · 4"). Unticking moves it back into its aisle. |
+| **Actual** | Apple stays in Fruit & veg, struck through. There is no In basket section at all. |
 
-**Actual:** The message appears without Undo. The list is gone for good.
+<a id="bk-106"></a>
 
-#### BK-105 · List detail · Ticked items stay in the middle of the list
-*Reported by: App review, 3★*
+#### BK-106 · Swiping Milk removed a different item
 
-**Steps**
-1. Check that **Settings → Move ticked items down** is on (it is by default).
-2. Open **Weekly shop** and tick **Apple**.
+| **Screen** | List detail |
+|---|---|
+| **Reported by** | Support |
+| **Steps** | 1. Open **Weekly shop**.<br>2. Swipe **Milk** towards the start of the row. |
+| **Expected** | Milk is removed and "Milk removed" offers Undo. |
+| **Actual** | Another item disappears and Milk is still on the list. |
 
-**Expected:** Apple moves into the **In basket** section at the bottom ("In basket · 4"). Unticking moves it back into its aisle.
+<a id="bk-107"></a>
 
-**Actual:** Apple stays in Fruit & veg, struck through. There is no In basket section at all.
+#### BK-107 · Undo after removing an item does nothing
 
-#### BK-106 · List detail · Swiping Milk removed a different item
-*Reported by: Support*
+| **Screen** | List detail |
+|---|---|
+| **Reported by** | QA |
+| **Steps** | 1. Open **Weekly shop**.<br>2. Remove any item by swiping it.<br>3. Tap **Undo** on the message straight away. |
+| **Expected** | The item comes back in the same place, with the same quantity, price, note and tick. |
+| **Actual** | Nothing happens. The item stays removed. |
 
-**Steps**
-1. Open **Weekly shop**.
-2. Swipe **Milk** towards the start of the row.
+<a id="bk-108"></a>
 
-**Expected:** Milk is removed and "Milk removed" offers Undo.
+#### BK-108 · Sourdough bread shows $0.00
 
-**Actual:** Another item disappears and Milk is still on the list.
+| **Screen** | List detail |
+|---|---|
+| **Reported by** | PO |
+| **Steps** | 1. Open **Weekly shop**.<br>2. Look at **Sourdough bread** (it has no price) and at the footer. |
+| **Expected** | The row shows "—" instead of a price, and the footer says "1 item without price" under the totals. |
+| **Actual** | The row shows **$0.00** and the footer doesn't mention that an item has no price. |
 
-#### BK-107 · List detail · Undo after removing an item does nothing
-*Reported by: QA*
+<a id="bk-109"></a>
 
-**Steps**
-1. Open **Weekly shop**.
-2. Remove any item by swiping it.
-3. Tap **Undo** on the message straight away.
+#### BK-109 · Apple is $1.74 in Browse but $1.73 on my list
 
-**Expected:** The item comes back in the same place, with the same quantity, price, note and tick.
+| **Screen** | Browse → List detail |
+|---|---|
+| **Reported by** | App review, 2★ |
+| **Steps** | 1. Open **Camping trip** → **Browse products**.<br>2. The Apple card shows **$1.74** (was $1.99). Tap **+** on Apple.<br>3. Go back to the list. |
+| **Expected** | Apple's unit price on the list is **$1.74**, the same as the price shown in Browse. |
+| **Actual** | The list shows Apple at **$1.73**, one cent less than Browse. |
 
-**Actual:** Nothing happens. The item stays removed.
+<a id="bk-110"></a>
 
-#### BK-108 · List detail · Sourdough bread shows $0.00
-*Reported by: PO*
+#### BK-110 · "Clear basket" deleted my whole list
 
-**Steps**
-1. Open **Weekly shop**.
-2. Look at **Sourdough bread** (it has no price) and at the footer.
+| **Screen** | List detail |
+|---|---|
+| **Reported by** | App review, 1★ |
+| **Steps** | 1. Open **Weekly shop** (3 items are ticked).<br>2. Tap ⋮ → **Clear basket**. |
+| **Expected** | Only the 3 ticked items are removed, at once, and the message "3 items removed" offers **Undo** for 5 seconds. The 7 items still to buy stay. |
+| **Actual** | All 10 items are removed and there is no Undo. |
 
-**Expected:** The row shows "—" instead of a price, and the footer says "1 item without price" under the totals.
+<a id="bk-111"></a>
 
-**Actual:** The row shows **$0.00** and the footer doesn't mention that an item has no price.
+#### BK-111 · Aisles are in alphabetical order
 
-#### BK-109 · Browse → List detail · Apple is $1.74 in Browse but $1.73 on my list
-*Reported by: App review, 2★*
+| **Screen** | List detail |
+|---|---|
+| **Reported by** | PO |
+| **Steps** | 1. Open **Weekly shop** and look at the aisle order.<br>2. Go to **Settings → Categories**, move **Drinks** to the top (drag, or ⋮ → Move up), and go back to the list. |
+| **Expected** | Aisles follow the order on the Categories screen: Fruit & veg, Bakery, Dairy & eggs, … After moving Drinks to the top, Drinks comes first. |
+| **Actual** | Aisles are alphabetical (Bakery, Dairy & eggs, Drinks, Fruit & veg, …) and reordering Categories changes nothing. |
 
-**Steps**
-1. Open **Camping trip** → **Browse products**.
-2. The Apple card shows **$1.74** (was $1.99). Tap **+** on Apple.
-3. Go back to the list.
+<a id="bk-112"></a>
 
-**Expected:** Apple's unit price on the list is **$1.74**, the same as the price shown in Browse.
+#### BK-112 · Sharing an empty list crashes the app
 
-**Actual:** The list shows Apple at **$1.73**, one cent less than Browse.
+| **Screen** | List detail |
+|---|---|
+| **Reported by** | Crash report |
+| **Steps** | 1. Open **Camping trip** (it has no items).<br>2. Tap **Share**. |
+| **Expected** | Share is disabled on an empty list. The app never crashes. |
+| **Actual** | The app closes. |
 
-#### BK-110 · List detail · "Clear basket" deleted my whole list
-*Reported by: App review, 1★*
+<a id="bk-113"></a>
 
-**Steps**
-1. Open **Weekly shop** (3 items are ticked).
-2. Tap ⋮ → **Clear basket**.
+#### BK-113 · Editing an item makes a copy of it
 
-**Expected:** Only the 3 ticked items are removed, at once, and the message "3 items removed" offers **Undo** for 5 seconds. The 7 items still to buy stay.
+| **Screen** | Add / edit item |
+|---|---|
+| **Reported by** | Support |
+| **Steps** | 1. Open **Weekly shop** and tap the **Apple** row.<br>2. Change the quantity from 6 to 7 and tap **Save changes**. |
+| **Expected** | One Apple row with quantity 7. |
+| **Actual** | Two rows: Apple × 6 and Apple × 7. |
 
-**Actual:** All 10 items are removed and there is no Undo.
+<a id="bk-114"></a>
 
-#### BK-111 · List detail · Aisles are in alphabetical order
-*Reported by: PO*
+#### BK-114 · Quantity can go to 0 and −1
 
-**Steps**
-1. Open **Weekly shop** and look at the aisle order.
-2. Go to **Settings → Categories**, move **Drinks** to the top (drag, or ⋮ → Move up), and go back to the list.
+| **Screen** | Add / edit item |
+|---|---|
+| **Reported by** | QA |
+| **Steps** | 1. Open any list → **Add item**.<br>2. Tap **−** on the quantity a few times. |
+| **Expected** | The quantity stops at 1 and − is disabled there. + stops at 99. A typed quantity is kept between 1 and 99. |
+| **Actual** | The quantity goes to 0, −1 and lower. |
 
-**Expected:** Aisles follow the order on the Categories screen: Fruit & veg, Bakery, Dairy & eggs, … After moving Drinks to the top, Drinks comes first.
+<a id="bk-115"></a>
 
-**Actual:** Aisles are alphabetical (Bakery, Dairy & eggs, Drinks, Fruit & veg, …) and reordering Categories changes nothing.
+#### BK-115 · In Spanish, 1,99 becomes 199,00
 
-#### BK-112 · List detail · Sharing an empty list crashes the app
-*Reported by: Crash report*
+| **Screen** | Add / edit item |
+|---|---|
+| **Reported by** | App review, 1★ (Spain) |
+| **Steps** | 1. Go to **Settings → Language → Español**.<br>2. Open a list → **Añadir artículo**, name "Pan", unit price **1,99**, save. |
+| **Expected** | The item costs **1,99 US$**. |
+| **Actual** | The item costs **199,00**. |
 
-**Steps**
-1. Open **Camping trip** (it has no items).
-2. Tap **Share**.
+<a id="bk-116"></a>
 
-**Expected:** Share is disabled on an empty list. The app never crashes.
+#### BK-116 · Back after saving opens the form again
 
-**Actual:** The app closes.
+| **Screen** | Add / edit item |
+|---|---|
+| **Reported by** | QA |
+| **Steps** | 1. Open **Weekly shop** → **Add item**, name "Oat milk", tap **Add to Weekly shop**.<br>2. Press **Back**. |
+| **Expected** | After saving you're on Weekly shop, and Back goes to **Lists**. The form is never shown again. |
+| **Actual** | Back shows the Add item form again. |
 
-#### BK-113 · Add / edit item · Editing an item makes a copy of it
-*Reported by: Support*
+<a id="bk-117"></a>
 
-**Steps**
-1. Open **Weekly shop** and tap the **Apple** row.
-2. Change the quantity from 6 to 7 and tap **Save changes**.
+#### BK-117 · Double-tapping Save adds the item twice
 
-**Expected:** One Apple row with quantity 7.
+| **Screen** | Add / edit item |
+|---|---|
+| **Reported by** | Support |
+| **Steps** | 1. Open **Weekly shop** → **Add item**, name "Oat milk".<br>2. Double-tap **Add to Weekly shop** quickly. |
+| **Expected** | One "Oat milk" row. |
+| **Actual** | Two "Oat milk" rows. |
 
-**Actual:** Two rows: Apple × 6 and Apple × 7.
+<a id="bk-118"></a>
 
-#### BK-114 · Add / edit item · Quantity can go to 0 and −1
-*Reported by: QA*
+#### BK-118 · Browse shows a sofa, a bed and perfume
 
-**Steps**
-1. Open any list → **Add item**.
-2. Tap **−** on the quantity a few times.
+| **Screen** | Browse products |
+|---|---|
+| **Reported by** | App review, 1★ |
+| **Steps** | 1. Open any list → **Browse products**. |
+| **Expected** | Only the grocery catalog: **27 products** (Apple, Beef Steak, Cat Food, …). |
+| **Actual** | "30 products", including furniture, perfume and make-up. |
 
-**Expected:** The quantity stops at 1 and − is disabled there. + stops at 99. A typed quantity is kept between 1 and 99.
+<a id="bk-119"></a>
 
-**Actual:** The quantity goes to 0, −1 and lower.
+#### BK-119 · Searching "apple" shows iPhones
 
-#### BK-115 · Add / edit item · In Spanish, 1,99 becomes 199,00
-*Reported by: App review, 1★ (Spain)*
+| **Screen** | Browse products |
+|---|---|
+| **Reported by** | App review, 2★ |
+| **Steps** | 1. Open **Browse products**.<br>2. Search for **apple**. |
+| **Expected** | Only groceries that match: **Apple**. Search is instant, works offline, ignores case, and combines with the aisle chips. |
+| **Actual** | Results include Apple AirPods, iPhones and MacBooks. |
 
-**Steps**
-1. Go to **Settings → Language → Español**.
-2. Open a list → **Añadir artículo**, name "Pan", unit price **1,99**, save.
+<a id="bk-120"></a>
 
-**Expected:** The item costs **1,99 US$**.
+#### BK-120 · The app crashes without internet
 
-**Actual:** The item costs **199,00**.
+| **Screen** | Browse products |
+|---|---|
+| **Reported by** | Crash report |
+| **Steps** | 1. Start fresh: clear the app's data (`adb shell pm clear com.basket`), then tap **Get started**.<br>2. Turn on airplane mode (emulator: `adb shell cmd connectivity airplane-mode enable`).<br>3. Open **Weekly shop** → **Browse products**. |
+| **Expected** | The "Can't load products" screen with "Check your connection and try again." and **Retry**. The rest of the app keeps working. |
+| **Actual** | The app closes. |
 
-#### BK-116 · Add / edit item · Back after saving opens the form again
-*Reported by: QA*
+<a id="bk-121"></a>
 
-**Steps**
-1. Open **Weekly shop** → **Add item**, name "Oat milk", tap **Add to Weekly shop**.
-2. Press **Back**.
+#### BK-121 · Offline, Browse forgets the products it already loaded
 
-**Expected:** After saving you're on Weekly shop, and Back goes to **Lists**. The form is never shown again.
+| **Screen** | Browse products |
+|---|---|
+| **Reported by** | Support |
+| **Steps** | 1. Online, open **Browse products** and wait for the products.<br>2. Close the app from Recents and open it again.<br>3. Turn on airplane mode (emulator: `adb shell cmd connectivity airplane-mode enable`).<br>4. Open **Browse products** again. |
+| **Expected** | The products saved earlier are shown, with the banner "You're offline · showing products saved on <date>" and Retry. |
+| **Actual** | "Can't load products" (or the app closes, see BK-120). Nothing that was loaded earlier is kept. |
 
-**Actual:** Back shows the Add item form again.
+<a id="bk-122"></a>
 
-#### BK-117 · Add / edit item · Double-tapping Save adds the item twice
-*Reported by: Support*
+#### BK-122 · Adding one Beef Steak adds 43
 
-**Steps**
-1. Open **Weekly shop** → **Add item**, name "Oat milk".
-2. Double-tap **Add to Weekly shop** quickly.
+| **Screen** | Browse products |
+|---|---|
+| **Reported by** | App review, 1★ |
+| **Steps** | 1. Open **Camping trip** → **Browse products**.<br>2. Tap **+** on **Beef Steak** once, then go back to the list. |
+| **Expected** | Beef Steak × **1**. |
+| **Actual** | Beef Steak × **43**. |
 
-**Expected:** One "Oat milk" row.
+<a id="bk-123"></a>
 
-**Actual:** Two "Oat milk" rows.
+#### BK-123 · Adding Apple again makes a second Apple row
 
-#### BK-118 · Browse products · Browse shows a sofa, a bed and perfume
-*Reported by: App review, 1★*
+| **Screen** | Browse products |
+|---|---|
+| **Reported by** | QA |
+| **Steps** | 1. Open **Weekly shop** → **Browse products**. The Apple card shows the stepper "− 6 +".<br>2. Tap **+** on Apple and go back to the list. |
+| **Expected** | Still one Apple row, now × 7. The stepper on the card shows 7. |
+| **Actual** | A second Apple row appears. |
 
-**Steps**
-1. Open any list → **Browse products**.
+<a id="bk-124"></a>
 
-**Expected:** Only the grocery catalog: **27 products** (Apple, Beef Steak, Cat Food, …).
+#### BK-124 · Green Chili Pepper doesn't say "Low stock"
 
-**Actual:** "30 products", including furniture, perfume and make-up.
+| **Screen** | Browse products |
+|---|---|
+| **Reported by** | PO |
+| **Steps** | 1. Open **Browse products** and find **Green Chili Pepper**.<br>2. Open its detail. |
+| **Expected** | The card shows a **Low stock** badge (icon and text), like the detail screen does. |
+| **Actual** | No badge on the card. Only the detail screen says Low stock. |
 
-#### BK-119 · Browse products · Searching "apple" shows iPhones
-*Reported by: App review, 2★*
+<a id="bk-125"></a>
 
-**Steps**
-1. Open **Browse products**.
-2. Search for **apple**.
+#### BK-125 · Deleting a category deleted its items
 
-**Expected:** Only groceries that match: **Apple**. Search is instant, works offline, ignores case, and combines with the aisle chips.
+| **Screen** | Categories |
+|---|---|
+| **Reported by** | Support |
+| **Steps** | 1. Go to **Settings → Categories**.<br>2. Tap ⋮ on **Dairy & eggs** → **Delete**.<br>3. Open **Weekly shop**. |
+| **Expected** | First a dialog: "Delete Dairy & eggs?" · "Its 2 items move to Other." · Cancel / Delete. After Delete, Milk and Eggs are in **Other**. |
+| **Actual** | No dialog. Milk and Eggs are gone from Weekly shop (10 items become 8). |
 
-**Actual:** Results include Apple AirPods, iPhones and MacBooks.
+<a id="bk-126"></a>
 
-#### BK-120 · Browse products · The app crashes without internet
-*Reported by: Crash report*
+#### BK-126 · Dark theme turns off after reopening the app
 
-**Steps**
-1. Start fresh: clear the app's data (`adb shell pm clear com.basket`), then tap **Get started**.
-2. Turn on airplane mode (emulator: `adb shell cmd connectivity airplane-mode enable`).
-3. Open **Weekly shop** → **Browse products**.
+| **Screen** | Settings |
+|---|---|
+| **Reported by** | App review, 3★ |
+| **Steps** | 1. Go to **Settings → Theme → Dark**.<br>2. Close the app from Recents and open it again. |
+| **Expected** | The app is still dark, and Settings still says Dark. |
+| **Actual** | The app is back to the system theme. |
 
-**Expected:** The "Can't load products" screen with "Check your connection and try again." and **Retry**. The rest of the app keeps working.
+<a id="bk-127"></a>
 
-**Actual:** The app closes.
+#### BK-127 · Spanish is half English, and prices use "$"
 
-#### BK-121 · Browse products · Offline, Browse forgets the products it already loaded
-*Reported by: Support*
+| **Screen** | Whole app |
+|---|---|
+| **Reported by** | App review, 2★ (Spain) |
+| **Steps** | 1. Go to **Settings → Language → Español**.<br>2. Open **Weekly shop**, **Browse products** and **Añadir artículo**. |
+| **Expected** | Everything is in Spanish except product names from the catalog. Prices use the Spanish format: **45,84 US$**. |
+| **Actual** | Some labels stay in English, and some prices show as "$45.84" or "$1,99". |
 
-**Steps**
-1. Online, open **Browse products** and wait for the products.
-2. Close the app from Recents and open it again.
-3. Turn on airplane mode (emulator: `adb shell cmd connectivity airplane-mode enable`).
-4. Open **Browse products** again.
+<a id="bk-128"></a>
 
-**Expected:** The products saved earlier are shown, with the banner "You're offline · showing products saved on <date>" and Retry.
+#### BK-128 · Arabic isn't right-to-left
 
-**Actual:** "Can't load products" (or the app closes, see BK-120). Nothing that was loaded earlier is kept.
+| **Screen** | Whole app |
+|---|---|
+| **Reported by** | App review, 2★ |
+| **Steps** | 1. Go to **Settings → Language → العربية**.<br>2. Open **Lists**, **Weekly shop** and **Add item**. |
+| **Expected** | The layout is mirrored: the back arrow points right, checkboxes are on the right, and totals on the left. Prices still read left to right ("$10.44"), and − still decreases. |
+| **Actual** | Everything stays left-to-right. |
 
-#### BK-122 · Browse products · Adding one Beef Steak adds 43
-*Reported by: App review, 1★*
+<a id="bk-129"></a>
 
-**Steps**
-1. Open **Camping trip** → **Browse products**.
-2. Tap **+** on **Beef Steak** once, then go back to the list.
+#### BK-129 · Dark mode has white rows and cards
 
-**Expected:** Beef Steak × **1**.
+| **Screen** | Whole app |
+|---|---|
+| **Reported by** | App review, 3★ |
+| **Steps** | 1. Go to **Settings → Theme → Dark**.<br>2. Open **Weekly shop** and **Browse products**. |
+| **Expected** | Every background is dark. Nothing stays white. |
+| **Actual** | Item rows and product cards are white. |
 
-**Actual:** Beef Steak × **43**.
+<a id="bk-130"></a>
 
-#### BK-123 · Browse products · Adding Apple again makes a second Apple row
-*Reported by: QA*
+#### BK-130 · Prices are cut off with large text
 
-**Steps**
-1. Open **Weekly shop** → **Browse products**. The Apple card shows the stepper "− 6 +".
-2. Tap **+** on Apple and go back to the list.
+| **Screen** | Whole app |
+|---|---|
+| **Reported by** | Accessibility audit |
+| **Steps** | 1. Set the largest font size (Settings → Display → Font size, or `adb shell settings put system font_scale 2.0`).<br>2. Open **Weekly shop** and **Browse products**. |
+| **Expected** | Rows and product cards grow taller and prices wrap. Nothing is cut off or overlaps. |
+| **Actual** | Prices and names are clipped in item rows and product cards. |
 
-**Expected:** Still one Apple row, now × 7. The stepper on the card shows 7.
+<a id="bk-131"></a>
 
-**Actual:** A second Apple row appears.
+#### BK-131 · TalkBack says just "Button"
 
-#### BK-124 · Browse products · Green Chili Pepper doesn't say "Low stock"
-*Reported by: PO*
-
-**Steps**
-1. Open **Browse products** and find **Green Chili Pepper**.
-2. Open its detail.
-
-**Expected:** The card shows a **Low stock** badge (icon and text), like the detail screen does.
-
-**Actual:** No badge on the card. Only the detail screen says Low stock.
-
-#### BK-125 · Categories · Deleting a category deleted its items
-*Reported by: Support*
-
-**Steps**
-1. Go to **Settings → Categories**.
-2. Tap ⋮ on **Dairy & eggs** → **Delete**.
-3. Open **Weekly shop**.
-
-**Expected:** First a dialog: "Delete Dairy & eggs?" · "Its 2 items move to Other." · Cancel / Delete. After Delete, Milk and Eggs are in **Other**.
-
-**Actual:** No dialog. Milk and Eggs are gone from Weekly shop (10 items become 8).
-
-#### BK-126 · Settings · Dark theme turns off after reopening the app
-*Reported by: App review, 3★*
-
-**Steps**
-1. Go to **Settings → Theme → Dark**.
-2. Close the app from Recents and open it again.
-
-**Expected:** The app is still dark, and Settings still says Dark.
-
-**Actual:** The app is back to the system theme.
-
-#### BK-127 · Whole app · Spanish is half English, and prices use "$"
-*Reported by: App review, 2★ (Spain)*
-
-**Steps**
-1. Go to **Settings → Language → Español**.
-2. Open **Weekly shop**, **Browse products** and **Añadir artículo**.
-
-**Expected:** Everything is in Spanish except product names from the catalog. Prices use the Spanish format: **45,84 US$**.
-
-**Actual:** Some labels stay in English, and some prices show as "$45.84" or "$1,99".
-
-#### BK-128 · Whole app · Arabic isn't right-to-left
-*Reported by: App review, 2★*
-
-**Steps**
-1. Go to **Settings → Language → العربية**.
-2. Open **Lists**, **Weekly shop** and **Add item**.
-
-**Expected:** The layout is mirrored: the back arrow points right, checkboxes are on the right, and totals on the left. Prices still read left to right ("$10.44"), and − still decreases.
-
-**Actual:** Everything stays left-to-right.
-
-#### BK-129 · Whole app · Dark mode has white rows and cards
-*Reported by: App review, 3★*
-
-**Steps**
-1. Go to **Settings → Theme → Dark**.
-2. Open **Weekly shop** and **Browse products**.
-
-**Expected:** Every background is dark. Nothing stays white.
-
-**Actual:** Item rows and product cards are white.
-
-#### BK-130 · Whole app · Prices are cut off with large text
-*Reported by: Accessibility audit*
-
-**Steps**
-1. Set the largest font size (Settings → Display → Font size, or `adb shell settings put system font_scale 2.0`).
-2. Open **Weekly shop** and **Browse products**.
-
-**Expected:** Rows and product cards grow taller and prices wrap. Nothing is cut off or overlaps.
-
-**Actual:** Prices and names are clipped in item rows and product cards.
-
-#### BK-131 · Whole app · TalkBack says just "Button"
-*Reported by: Accessibility audit*
-
-**Steps**
-1. Turn on TalkBack.
-2. On **Weekly shop**, focus **Share**. On **Add item**, focus **−** and **+**. On **Browse products**, focus **+** on a card. On **Edit item**, focus **Delete**.
-
-**Expected:** Each button has a spoken label: "Share list", "Decrease quantity", "Increase quantity", "Add Apple to list", "Delete item".
-
-**Actual:** TalkBack reads only "Button" (or "Unlabelled, button").
+| **Screen** | Whole app |
+|---|---|
+| **Reported by** | Accessibility audit |
+| **Steps** | 1. Turn on TalkBack.<br>2. On **Weekly shop**, focus **Share**. On **Add item**, focus **−** and **+**. On **Browse products**, focus **+** on a card. On **Edit item**, focus **Delete**. |
+| **Expected** | Each button has a spoken label: "Share list", "Decrease quantity", "Increase quantity", "Add Apple to list", "Delete item". |
+| **Actual** | TalkBack reads only "Button" (or "Unlabelled, button"). |
 
 ### Feature requests
 
-#### BK-201 · New screen · Spending by aisle
-*Requested by: PO*
+<a id="bk-201"></a>
+
+#### BK-201 · Spending by aisle
+
+| **Type** | New screen |
+|---|---|
+| **Requested by** | PO |
 
 **Why:** shoppers want to see where the money goes before they leave home.
 
@@ -427,8 +468,13 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 |---|---|---|---|
 | Menu item and title | Spending by aisle | Gasto por pasillo | الإنفاق حسب الممر |
 
-#### BK-202 · New button · Untick all
-*Requested by: PO*
+<a id="bk-202"></a>
+
+#### BK-202 · Untick all
+
+| **Type** | New button |
+|---|---|
+| **Requested by** | PO |
 
 **Why:** people reuse the same weekly list; after a trip they want every item back on the "to buy" side in one tap.
 
@@ -447,8 +493,13 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | Menu item | Untick all | Desmarcar todo | إلغاء تحديد الكل |
 | Message (3) | 3 items unticked | 3 artículos desmarcados | تم إلغاء تحديد 3 عناصر |
 
-#### BK-203 · New functionality · Quick add on List detail
-*Requested by: PO*
+<a id="bk-203"></a>
+
+#### BK-203 · Quick add on List detail
+
+| **Type** | New functionality |
+|---|---|
+| **Requested by** | PO |
 
 **Why:** adding an item through the full form takes too long in the store.
 
@@ -474,8 +525,13 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | Placeholder | Add an item | Añadir un artículo | أضف عنصرًا |
 | Message | Kiwi added | Kiwi añadido | تمت إضافة Kiwi |
 
-#### BK-204 · New text · Item count under the list name
-*Requested by: PO*
+<a id="bk-204"></a>
+
+#### BK-204 · Item count under the list name
+
+| **Type** | New text |
+|---|---|
+| **Requested by** | PO |
 
 **Why:** in the store people want to know at a glance how much is left.
 
@@ -495,8 +551,13 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | BBQ Saturday | 6 items | 6 artículos | 6 عناصر |
 | Camping trip | No items yet | Sin artículos todavía | لا توجد عناصر بعد |
 
-#### BK-205 · New button · Share a list from the Lists screen
-*Requested by: PO*
+<a id="bk-205"></a>
+
+#### BK-205 · Share a list from the Lists screen
+
+| **Type** | New button |
+|---|---|
+| **Requested by** | PO |
 
 **Why:** people share the shopping list with a partner without opening it.
 
