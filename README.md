@@ -94,9 +94,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Lists |
 |---|---|
 | **Reported by** | QA |
+| **Description** | Each card on Lists summarises one shopping list: its name, how far the trip is, the estimated total and, when some items have no price yet, a small note such as "+ 1 without price" so the shopper knows the total is incomplete. Every count in the app must read naturally in English, Spanish and Arabic, in the singular and the plural. |
 | **Steps** | 1. Open **Lists**.<br>2. Look at the **Weekly shop** card, under the total. |
 | **Expected** | "+ 1 without price". Every count is grammatical in English, Spanish and Arabic ("1 item", "2 items"). |
-| **Actual** | "+ 1 items without price". |
+| **Actual** | The card reads "+ 1 items without price". It is wrong English on the very first screen, and the same kind of mistake appears for other counts and in Spanish and Arabic, whose plural rules differ from English (Arabic has six plural forms). It makes the app look unfinished, and store reviewers and QA report it straight away. |
 
 <a id="bk-102"></a>
 
@@ -105,9 +106,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Lists |
 |---|---|
 | **Reported by** | App review, 2★ |
+| **Description** | The total on a list card is the estimated cost of the whole trip: for every item with a price, quantity × unit price, added up. It must always be exactly the same amount as the **Total** in the List detail footer, so people can compare and budget their lists without opening each one. |
 | **Steps** | 1. Open **Lists** and note the total on the **Weekly shop** card.<br>2. Open **Weekly shop** and look at the footer. |
 | **Expected** | The card and the footer show the same total: **$45.84** for Weekly shop and **$102.91** for BBQ Saturday. |
-| **Actual** | The card shows **$30.47** (BBQ Saturday **$33.58**) while the list says $45.84. |
+| **Actual** | The card shows **$30.47** for Weekly shop (the list says $45.84) and **$33.58** for BBQ Saturday (the list says $102.91). The two screens disagree about the same list, so the user can't trust either number. Worse, the card is always lower: someone who budgets from the Lists screen takes too little money to the store. |
 
 <a id="bk-103"></a>
 
@@ -116,9 +118,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Lists |
 |---|---|
 | **Reported by** | QA |
+| **Description** | The progress bar on each card shows how much of the trip is done: items in the basket divided by all items on the list. "3 of 10 in basket" fills 30% of the bar; only "10 of 10" fills it completely and shows Done. The bar exists so people can see progress at a glance without reading. |
 | **Steps** | 1. Open **Lists**.<br>2. Look at the **Weekly shop** card: "3 of 10 in basket". |
 | **Expected** | The bar is 30% filled (3 of 10). |
-| **Actual** | The bar is completely full. |
+| **Actual** | The bar is completely full as soon as a single item is ticked. The bar and the text next to it contradict each other, and the bar, the part people actually glance at, says the trip is finished while 7 items are still to buy. Shoppers relying on it can leave the store without everything they need. |
 
 <a id="bk-104"></a>
 
@@ -127,9 +130,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Lists |
 |---|---|
 | **Reported by** | Support |
+| **Description** | Delete, in the ⋮ menu of a list card, removes the list immediately. Like every destructive action in Basket, it is only allowed to be instant because a message then offers **Undo** for 5 seconds. Undo must bring the list back exactly as it was: items, ticks, prices, notes and its position on Lists. |
 | **Steps** | 1. Open **Lists**.<br>2. Tap ⋮ on **BBQ Saturday** → **Delete**. |
 | **Expected** | The list disappears and the message "BBQ Saturday deleted" offers **Undo** for 5 seconds. Undo brings the list back exactly as it was (items, ticks, position). |
-| **Actual** | The message appears without Undo. The list is gone for good. |
+| **Actual** | The message "BBQ Saturday deleted" appears, but without Undo. The list and every item on it are gone for good. Delete sits right next to Rename and Duplicate, so a mis-tap destroys a list the user may have built up over weeks, with no confirmation and no way to recover it. |
 
 <a id="bk-105"></a>
 
@@ -138,9 +142,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | List detail |
 |---|---|
 | **Reported by** | App review, 3★ |
+| **Description** | The setting **Move ticked items down** (on by default) keeps the "to buy" part of a list short while shopping. When an item is ticked it moves into the **In basket** section at the bottom of the list; unticking it moves it back into its aisle. With the setting off, ticked items stay in their aisle, struck through. |
 | **Steps** | 1. Check that **Settings → Move ticked items down** is on (it is by default).<br>2. Open **Weekly shop** and tick **Apple**. |
 | **Expected** | Apple moves into the **In basket** section at the bottom ("In basket · 4"). Unticking moves it back into its aisle. |
-| **Actual** | Apple stays in Fruit & veg, struck through. There is no In basket section at all. |
+| **Actual** | Apple stays in Fruit & veg, struck through, and there is no In basket section at all. The list never gets shorter as you shop, so people keep scrolling past items they already have. The setting also does nothing: switching it on or off changes nothing on screen, which users report as broken. |
 
 <a id="bk-106"></a>
 
@@ -149,9 +154,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | List detail |
 |---|---|
 | **Reported by** | Support |
+| **Description** | Swiping a row is the quick way to take an item off a list. It must remove exactly the row that was swiped, and the message "Milk removed" offers Undo for 5 seconds. |
 | **Steps** | 1. Open **Weekly shop**.<br>2. Swipe **Milk** towards the start of the row. |
 | **Expected** | Milk is removed and "Milk removed" offers Undo. |
-| **Actual** | Another item disappears and Milk is still on the list. |
+| **Actual** | A different item disappears, and Milk is still on the list. The removed item is often in another aisle, off screen, so the user doesn't notice. They remove something they still need to buy and only find out at home that it is missing. It is silent data loss that looks like the user's own mistake. |
 
 <a id="bk-107"></a>
 
@@ -160,9 +166,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | List detail |
 |---|---|
 | **Reported by** | QA |
+| **Description** | After an item is removed, the message at the bottom offers **Undo** for 5 seconds. Undo must put back the same item in the same place, with the same quantity, price, note and tick. Undo is what makes one-swipe removal safe. |
 | **Steps** | 1. Open **Weekly shop**.<br>2. Remove any item by swiping it.<br>3. Tap **Undo** on the message straight away. |
 | **Expected** | The item comes back in the same place, with the same quantity, price, note and tick. |
-| **Actual** | Nothing happens. The item stays removed. |
+| **Actual** | Tapping Undo does nothing: the message disappears and the item stays removed. Swipes happen by accident while scrolling, and Undo is the only safety net. Without it, every accidental swipe means retyping the item, its price and its note. |
 
 <a id="bk-108"></a>
 
@@ -171,9 +178,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | List detail |
 |---|---|
 | **Reported by** | PO |
+| **Description** | Items can be added without a price, for example bread from the bakery counter. Such an item shows "—" instead of a price and adds nothing to the totals. The footer then says "1 item without price" under the totals, so the shopper knows the total is incomplete and which items still need a price. |
 | **Steps** | 1. Open **Weekly shop**.<br>2. Look at **Sourdough bread** (it has no price) and at the footer. |
 | **Expected** | The row shows "—" instead of a price, and the footer says "1 item without price" under the totals. |
-| **Actual** | The row shows **$0.00** and the footer doesn't mention that an item has no price. |
+| **Actual** | The row shows **$0.00** and the footer says nothing. $0.00 claims the bread is free, which is simply wrong. The total looks complete when it isn't, so the shopper under-budgets and can't tell which items still need a price. |
 
 <a id="bk-109"></a>
 
@@ -182,9 +190,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Browse → List detail |
 |---|---|
 | **Reported by** | App review, 2★ |
+| **Description** | Browse shows the price you pay for each product: the catalog price minus its discount, rounded to the nearest cent (Apple: $1.99 − 12.62% = **$1.74**). Tapping + adds the product to the open list at exactly that price, so the list total matches what the shopper saw in Browse and on Product detail. |
 | **Steps** | 1. Open **Camping trip** → **Browse products**.<br>2. The Apple card shows **$1.74** (was $1.99). Tap **+** on Apple.<br>3. Go back to the list. |
 | **Expected** | Apple's unit price on the list is **$1.74**, the same as the price shown in Browse. |
-| **Actual** | The list shows Apple at **$1.73**, one cent less than Browse. |
+| **Actual** | The list shows Apple at **$1.73**, one cent less than Browse. Several other products are also a cent lower once added (for example Eggs, Cucumber, Potatoes and Strawberry). It sounds small, but the list no longer matches the price the shopper was shown, the error multiplies with quantity and adds up across items, and money must be exact to the cent. Every total built from catalog items is slightly wrong. |
 
 <a id="bk-110"></a>
 
@@ -193,9 +202,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | List detail |
 |---|---|
 | **Reported by** | App review, 1★ |
+| **Description** | **Clear basket** (List detail → ⋮) tidies a list after a trip. It removes only the items that are ticked (already in the basket), at once, and the message "3 items removed" offers **Undo** for 5 seconds. Everything still to buy stays on the list. |
 | **Steps** | 1. Open **Weekly shop** (3 items are ticked).<br>2. Tap ⋮ → **Clear basket**. |
 | **Expected** | Only the 3 ticked items are removed, at once, and the message "3 items removed" offers **Undo** for 5 seconds. The 7 items still to buy stay. |
-| **Actual** | All 10 items are removed and there is no Undo. |
+| **Actual** | All 10 items are removed, including the 7 that haven't been bought yet, and there is no Undo. The action does far more than its name says: one tap empties the whole list, and the only way back is to rebuild it from memory. |
 
 <a id="bk-111"></a>
 
@@ -204,9 +214,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | List detail |
 |---|---|
 | **Reported by** | PO |
+| **Description** | Items are grouped by aisle in the order set on the **Categories** screen, so the list follows the shopper's walk through their own store. The default order is Fruit & veg, Bakery, Dairy & eggs, Meat & fish, Pantry, Frozen, Drinks, Household & pets, Other. When the user reorders categories, every list regroups immediately. |
 | **Steps** | 1. Open **Weekly shop** and look at the aisle order.<br>2. Go to **Settings → Categories**, move **Drinks** to the top (drag, or ⋮ → Move up), and go back to the list. |
 | **Expected** | Aisles follow the order on the Categories screen: Fruit & veg, Bakery, Dairy & eggs, … After moving Drinks to the top, Drinks comes first. |
-| **Actual** | Aisles are alphabetical (Bakery, Dairy & eggs, Drinks, Fruit & veg, …) and reordering Categories changes nothing. |
+| **Actual** | Aisles are alphabetical (Bakery, Dairy & eggs, Drinks, Fruit & veg, Household & pets, Pantry), and reordering Categories changes nothing. This breaks the app's main promise from the Welcome screen, that items sit in your store's aisle order. Shoppers zig-zag through the store, and the Categories screen seems to save their order but has no effect. |
 
 <a id="bk-112"></a>
 
@@ -215,9 +226,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | List detail |
 |---|---|
 | **Reported by** | Crash report |
+| **Description** | **Share** sends the list as plain text through the system share sheet (list name, items to buy, items in the basket, total). A list with no items has nothing to share, so Share is disabled there. |
 | **Steps** | 1. Open **Camping trip** (it has no items).<br>2. Tap **Share**. |
 | **Expected** | Share is disabled on an empty list. The app never crashes. |
-| **Actual** | The app closes. |
+| **Actual** | The app closes. Every new list starts empty, so this is easy to hit, and a crash is the worst possible outcome of tapping a button. Crashes also show up in the store's crash reports and pull the rating down. |
 
 <a id="bk-113"></a>
 
@@ -226,9 +238,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Add / edit item |
 |---|---|
 | **Reported by** | Support |
+| **Description** | Tapping an item opens **Edit item** with its current values. **Save changes** updates that same item in place; the list keeps one row per item. |
 | **Steps** | 1. Open **Weekly shop** and tap the **Apple** row.<br>2. Change the quantity from 6 to 7 and tap **Save changes**. |
 | **Expected** | One Apple row with quantity 7. |
-| **Actual** | Two rows: Apple × 6 and Apple × 7. |
+| **Actual** | The list now has two rows, Apple × 6 and Apple × 7. The total goes up by $12.18 instead of $1.74, because both rows count. Every edit adds another copy, so lists fill up with duplicates and people buy the same thing twice. |
 
 <a id="bk-114"></a>
 
@@ -237,9 +250,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Add / edit item |
 |---|---|
 | **Reported by** | QA |
+| **Description** | The quantity of an item is a whole number from 1 to 99. The − button is disabled at 1 and + is disabled at 99, and a typed quantity is kept within the same range. |
 | **Steps** | 1. Open any list → **Add item**.<br>2. Tap **−** on the quantity a few times. |
 | **Expected** | The quantity stops at 1 and − is disabled there. + stops at 99. A typed quantity is kept between 1 and 99. |
-| **Actual** | The quantity goes to 0, −1 and lower. |
+| **Actual** | The quantity goes to 0, −1 and lower, and the item can be saved like that. A quantity of 0 or less means nothing on a shopping list. With a price, a negative quantity even gives a negative line total and lowers the list total, so the totals are wrong. |
 
 <a id="bk-115"></a>
 
@@ -248,9 +262,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Add / edit item |
 |---|---|
 | **Reported by** | App review, 1★ (Spain) |
+| **Description** | The unit price field accepts the decimal separator of the app language. English users type "1.99", Spanish users type "1,99", and both mean one dollar ninety-nine. |
 | **Steps** | 1. Go to **Settings → Language → Español**.<br>2. Open a list → **Añadir artículo**, name "Pan", unit price **1,99**, save. |
 | **Expected** | The item costs **1,99 US$**. |
-| **Actual** | The item costs **199,00**. |
+| **Actual** | The item costs **199,00**, a hundred times too much, and the list total jumps accordingly. Spanish-speaking users can't enter cents the normal way at all, so every price they type is wrong. For a whole market the app's core feature, knowing what the trip costs, is broken. |
 
 <a id="bk-116"></a>
 
@@ -259,9 +274,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Add / edit item |
 |---|---|
 | **Reported by** | QA |
+| **Description** | After saving, the form closes and the user is back on List detail. The form is gone from the navigation history, so the next Back goes to **Lists**. |
 | **Steps** | 1. Open **Weekly shop** → **Add item**, name "Oat milk", tap **Add to Weekly shop**.<br>2. Press **Back**. |
 | **Expected** | After saving you're on Weekly shop, and Back goes to **Lists**. The form is never shown again. |
-| **Actual** | Back shows the Add item form again. |
+| **Actual** | Back shows the Add item form again. Users think the item wasn't saved and save it a second time (creating a duplicate), or keep pressing Back to escape. It breaks the navigation everyone expects from a phone app. |
 
 <a id="bk-117"></a>
 
@@ -270,9 +286,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Add / edit item |
 |---|---|
 | **Reported by** | Support |
+| **Description** | Save, Add and Create act once, however fast they are tapped. People use Basket one-handed in the store, where double taps happen all the time. |
 | **Steps** | 1. Open **Weekly shop** → **Add item**, name "Oat milk".<br>2. Double-tap **Add to Weekly shop** quickly. |
 | **Expected** | One "Oat milk" row. |
-| **Actual** | Two "Oat milk" rows. |
+| **Actual** | Two "Oat milk" rows are added. Duplicates inflate the item count and the total, and users rarely notice until they are at the checkout with two of everything. |
 
 <a id="bk-118"></a>
 
@@ -281,9 +298,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Browse products |
 |---|---|
 | **Reported by** | App review, 1★ |
+| **Description** | Browse products shows Basket's grocery catalog: the **27 products** of the DummyJSON groceries category (Apple, Beef Steak, Cat Food, …), sorted A→Z, each with its price, discount and aisle chip. |
 | **Steps** | 1. Open any list → **Browse products**. |
 | **Expected** | Only the grocery catalog: **27 products** (Apple, Beef Steak, Cat Food, …). |
-| **Actual** | "30 products", including furniture, perfume and make-up. |
+| **Actual** | Browse says "30 products" and shows beds, sofas, perfume and make-up among the groceries, while 12 real groceries are missing (for example Milk, Rice and Water). Users can add a $1,899.99 bed to a grocery list, which makes the totals meaningless, and they can't find everyday products they need. |
 
 <a id="bk-119"></a>
 
@@ -292,9 +310,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Browse products |
 |---|---|
 | **Reported by** | App review, 2★ |
+| **Description** | Search filters the grocery products Browse already shows. It is instant, works offline, ignores upper and lower case, and combines with the selected aisle chip. Searching "apple" finds the product Apple. |
 | **Steps** | 1. Open **Browse products**.<br>2. Search for **apple**. |
 | **Expected** | Only groceries that match: **Apple**. Search is instant, works offline, ignores case, and combines with the aisle chips. |
-| **Actual** | Results include Apple AirPods, iPhones and MacBooks. |
+| **Actual** | The results include Apple AirPods, iPhones and MacBooks. Search returns things that are not groceries at all, which users can then add to their shopping list at electronics prices. Searching also needs an internet connection, so it fails in the store exactly when it is needed. |
 
 <a id="bk-120"></a>
 
@@ -303,9 +322,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Browse products |
 |---|---|
 | **Reported by** | Crash report |
+| **Description** | Browse needs the internet only to download the catalog. With no connection and nothing saved yet, it shows "Can't load products" with "Check your connection and try again." and a **Retry** button. The rest of the app keeps working, because lists are stored on the phone. |
 | **Steps** | 1. Start fresh: clear the app's data (`adb shell pm clear com.basket`), then tap **Get started**.<br>2. Turn on airplane mode (emulator: `adb shell cmd connectivity airplane-mode enable`).<br>3. Open **Weekly shop** → **Browse products**. |
 | **Expected** | The "Can't load products" screen with "Check your connection and try again." and **Retry**. The rest of the app keeps working. |
-| **Actual** | The app closes. |
+| **Actual** | The app closes. Supermarkets often have poor signal, which is exactly where people use Basket, so they lose their place mid-trip. Users also conclude the whole app is broken without internet, although lists work fully offline, which contradicts the "Works offline" promise on the Welcome screen. |
 
 <a id="bk-121"></a>
 
@@ -314,9 +334,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Browse products |
 |---|---|
 | **Reported by** | Support |
+| **Description** | Every successful catalog download is saved on the phone. Later, without internet, Browse shows the saved products with the banner "You're offline · showing products saved on <date>" and Retry. This way people can load the catalog at home and still add products in the store. |
 | **Steps** | 1. Online, open **Browse products** and wait for the products.<br>2. Close the app from Recents and open it again.<br>3. Turn on airplane mode (emulator: `adb shell cmd connectivity airplane-mode enable`).<br>4. Open **Browse products** again. |
 | **Expected** | The products saved earlier are shown, with the banner "You're offline · showing products saved on <date>" and Retry. |
-| **Actual** | "Can't load products" (or the app closes, see BK-120). Nothing that was loaded earlier is kept. |
+| **Actual** | Browse shows "Can't load products" (or the app closes, see BK-120), as if the catalog had never been downloaded. Nothing loaded earlier is kept once the app restarts. Shoppers who opened Browse at home can't use it in the store, and the "Works offline" promise doesn't hold for the catalog. |
 
 <a id="bk-122"></a>
 
@@ -325,9 +346,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Browse products |
 |---|---|
 | **Reported by** | App review, 1★ |
+| **Description** | Tapping **+** on a product card adds **one** unit of that product to the open list, and each further tap adds one more. It is the quickest way to build a list from the catalog. |
 | **Steps** | 1. Open **Camping trip** → **Browse products**.<br>2. Tap **+** on **Beef Steak** once, then go back to the list. |
 | **Expected** | Beef Steak × **1**. |
-| **Actual** | Beef Steak × **43**. |
+| **Actual** | The list shows Beef Steak × **43**: $504.82 added from a single tap. Other products are also added in odd quantities (for example Apple × 7, Milk × 5). The list total becomes absurd, the user has to notice and correct every quantity by hand, and anyone shopping from the list without checking buys far too much. |
 
 <a id="bk-123"></a>
 
@@ -336,9 +358,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Browse products |
 |---|---|
 | **Reported by** | QA |
+| **Description** | A product that is already on the list shows a compact stepper with its quantity on the card ("− 6 +"). Tapping + raises the quantity of that same row. A product never appears twice on a list; typed items follow the same rule. |
 | **Steps** | 1. Open **Weekly shop** → **Browse products**. The Apple card shows the stepper "− 6 +".<br>2. Tap **+** on Apple and go back to the list. |
 | **Expected** | Still one Apple row, now × 7. The stepper on the card shows 7. |
-| **Actual** | A second Apple row appears. |
+| **Actual** | A second Apple row appears. The same product is now listed twice with separate quantities, so the stepper and the list disagree, the total is split across two rows, and shoppers may buy both amounts or delete the wrong row. |
 
 <a id="bk-124"></a>
 
@@ -347,9 +370,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Browse products |
 |---|---|
 | **Reported by** | PO |
+| **Description** | Product cards show a stock badge when a product isn't simply in stock: **Low stock** (warning colour, icon and text) or **Out of stock** (card dimmed, + disabled). In today's catalog, Green Chili Pepper is Low Stock. |
 | **Steps** | 1. Open **Browse products** and find **Green Chili Pepper**.<br>2. Open its detail. |
 | **Expected** | The card shows a **Low stock** badge (icon and text), like the detail screen does. |
-| **Actual** | No badge on the card. Only the detail screen says Low stock. |
+| **Actual** | The card shows no badge; only the detail screen says Low stock. Shoppers planning from the grid don't learn that an item may be unavailable, and the card and the detail screen disagree about the same product. |
 
 <a id="bk-125"></a>
 
@@ -358,9 +382,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Categories |
 |---|---|
 | **Reported by** | Support |
+| **Description** | Deleting a category never deletes items. An empty category is removed at once, with Undo. A category that still has items first asks for confirmation ("Delete Dairy & eggs?" · "Its 2 items move to Other." · Cancel / Delete) and then moves those items to **Other**. This is one of the two places where Basket asks first, because the change can't simply be undone. |
 | **Steps** | 1. Go to **Settings → Categories**.<br>2. Tap ⋮ on **Dairy & eggs** → **Delete**.<br>3. Open **Weekly shop**. |
 | **Expected** | First a dialog: "Delete Dairy & eggs?" · "Its 2 items move to Other." · Cancel / Delete. After Delete, Milk and Eggs are in **Other**. |
-| **Actual** | No dialog. Milk and Eggs are gone from Weekly shop (10 items become 8). |
+| **Actual** | There is no dialog, and Milk and Eggs disappear from Weekly shop (10 items become 8), and from every other list that had items in that aisle. It is silent data loss across all lists from a settings screen. Users won't connect tidying up their aisles with groceries vanishing, and there is no way to get them back. |
 
 <a id="bk-126"></a>
 
@@ -369,9 +394,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Settings |
 |---|---|
 | **Reported by** | App review, 3★ |
+| **Description** | The **Theme** setting (System, Light or Dark) applies to the whole app at once and is remembered: it stays as chosen after the app is closed and opened again. |
 | **Steps** | 1. Go to **Settings → Theme → Dark**.<br>2. Close the app from Recents and open it again. |
 | **Expected** | The app is still dark, and Settings still says Dark. |
-| **Actual** | The app is back to the system theme. |
+| **Actual** | The app is back to the system theme, and Settings says System again. The choice is forgotten every time, so users have to set it again on every launch. For people who chose Dark to use the app at night, it opens bright white each time. |
 
 <a id="bk-127"></a>
 
@@ -380,9 +406,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Whole app |
 |---|---|
 | **Reported by** | App review, 2★ (Spain) |
+| **Description** | In Spanish, everything on screen is in Spanish except the names and descriptions of catalog products, which come from the API in English. Money uses the Spanish format, with a decimal comma and the currency after the amount: **45,84 US$**. |
 | **Steps** | 1. Go to **Settings → Language → Español**.<br>2. Open **Weekly shop**, **Browse products** and **Añadir artículo**. |
 | **Expected** | Everything is in Spanish except product names from the catalog. Prices use the Spanish format: **45,84 US$**. |
-| **Actual** | Some labels stay in English, and some prices show as "$45.84" or "$1,99". |
+| **Actual** | Some labels stay in English (for example on the list footer, the product cards or the item form), and some prices show as "$45.84" or "$1,99" next to others in "45,84 US$". Two money formats on one screen make amounts ambiguous (is "$1,99" one dollar ninety-nine, or 199?). The Spanish version looks unfinished, and Spanish users can't trust the numbers. |
 
 <a id="bk-128"></a>
 
@@ -391,9 +418,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Whole app |
 |---|---|
 | **Reported by** | App review, 2★ |
+| **Description** | Arabic reads from right to left, so in Arabic the whole layout mirrors: the back arrow points right, checkboxes sit on the right, totals and prices on the left, and swipe directions reverse. Prices and numbers themselves still read left to right ("$10.44"), and the − button still decreases. |
 | **Steps** | 1. Go to **Settings → Language → العربية**.<br>2. Open **Lists**, **Weekly shop** and **Add item**. |
 | **Expected** | The layout is mirrored: the back arrow points right, checkboxes are on the right, and totals on the left. Prices still read left to right ("$10.44"), and − still decreases. |
-| **Actual** | Everything stays left-to-right. |
+| **Actual** | Everything stays left-to-right: the Arabic text appears inside an English-shaped layout, the back arrow points the wrong way, and labels and their values are on the wrong sides. Arabic speakers have to read every screen against their natural direction, and it looks like a broken translation. |
 
 <a id="bk-129"></a>
 
@@ -402,9 +430,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Whole app |
 |---|---|
 | **Reported by** | App review, 3★ |
+| **Description** | In the Dark theme every surface uses the dark palette: backgrounds, item rows, cards and sheets. Nothing stays white, and text keeps enough contrast to be read comfortably. |
 | **Steps** | 1. Go to **Settings → Theme → Dark**.<br>2. Open **Weekly shop** and **Browse products**. |
 | **Expected** | Every background is dark. Nothing stays white. |
-| **Actual** | Item rows and product cards are white. |
+| **Actual** | Item rows and product cards stay bright white while their text turns light, so names and prices become almost impossible to read, light grey on white. The screen flashes bright white at night, which defeats the point of choosing Dark, and it fails basic contrast requirements. |
 
 <a id="bk-130"></a>
 
@@ -413,9 +442,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Whole app |
 |---|---|
 | **Reported by** | Accessibility audit |
+| **Description** | All text follows the phone's text-size setting. At the largest size, rows and product cards grow taller and long text wraps onto more lines, so nothing is cut off or overlaps. Many people with low vision use the largest size every day. |
 | **Steps** | 1. Set the largest font size (Settings → Display → Font size, or `adb shell settings put system font_scale 2.0`).<br>2. Open **Weekly shop** and **Browse products**. |
 | **Expected** | Rows and product cards grow taller and prices wrap. Nothing is cut off or overlaps. |
-| **Actual** | Prices and names are clipped in item rows and product cards. |
+| **Actual** | Prices and product names are clipped in item rows and product cards. The information people need most, the price, becomes unreadable for exactly the users who depend on large text. It fails the accessibility requirements app stores and accessibility audits check for. |
 
 <a id="bk-131"></a>
 
@@ -424,9 +454,10 @@ Android Studio Ladybug (2024.2)+ · JDK 17 · Android 8.0+ (minSdk 26).
 | **Screen** | Whole app |
 |---|---|
 | **Reported by** | Accessibility audit |
+| **Description** | Blind and low-vision users navigate with the TalkBack screen reader, which reads each control aloud. Every icon-only button must have a spoken label that says what it does: "Share list", "Decrease quantity", "Increase quantity", "Add Apple to list", "Delete item". |
 | **Steps** | 1. Turn on TalkBack.<br>2. On **Weekly shop**, focus **Share**. On **Add item**, focus **−** and **+**. On **Browse products**, focus **+** on a card. On **Edit item**, focus **Delete**. |
 | **Expected** | Each button has a spoken label: "Share list", "Decrease quantity", "Increase quantity", "Add Apple to list", "Delete item". |
-| **Actual** | TalkBack reads only "Button" (or "Unlabelled, button"). |
+| **Actual** | TalkBack reads only "Button" (or "Unlabelled, button"). Screen-reader users can't tell Share from Delete, or − from +, so they have to guess, and a wrong guess can delete an item or change a quantity. Basic tasks become impossible without sight, which is a fundamental accessibility failure. |
 
 ### Feature requests
 
